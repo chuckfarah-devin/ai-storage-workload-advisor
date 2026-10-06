@@ -52,6 +52,8 @@ describe('R-BE-3 block-size applicability → unknown', () => {
       .checks.find((c) => c.id === 'iops.backend')!;
     expect(be.status).toBe('modeled-constraint');
     expect(be.worstSampleId).toBe(over.id);
+    expect(be.selectionBasis).toBe('highest-budget-utilization');
+    expect(be.tierSampleIds).toEqual([over.id]);
   });
 
   it('assessSampleSet precedence: [unknown, computable-ready] → needs-investigation', () => {
@@ -63,6 +65,7 @@ describe('R-BE-3 block-size applicability → unknown', () => {
       .checks.find((c) => c.id === 'iops.backend')!;
     expect(be.status).toBe('needs-investigation');
     expect(be.worstSampleId).toBe(unknown.id);
+    expect(be.selectionBasis).toBe('earliest-at-status');
   });
 
   it('assessSampleSet precedence: [ready, ready] → ready', () => {
@@ -71,5 +74,7 @@ describe('R-BE-3 block-size applicability → unknown', () => {
       .find((d) => d.dimension === 'iops')!
       .checks.find((c) => c.id === 'iops.backend')!;
     expect(be.status).toBe('modeled-ready');
+    expect(be.selectionBasis).toBe('highest-budget-utilization');
+    expect(be.tierSampleIds).toEqual([VM_SAMPLES[0].id, VM_SAMPLES[1].id]);
   });
 });

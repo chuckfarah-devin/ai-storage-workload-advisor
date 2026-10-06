@@ -5,7 +5,6 @@ import type {
   DemandSample,
   DimensionResult,
   InfrastructureProfile,
-  Status,
   WorkloadProfile,
 } from './model.js';
 import { MANDATORY_LABEL } from './model.js';
@@ -92,9 +91,19 @@ export function assessSampleSet(
   }
   const perSample = samples.map((s) => assessSample(infra, workload, s, options));
 
-  const rank = (s: Status): number =>
-    s === 'modeled-constraint' ? 2 : s === 'needs-investigation' ? 1 : 0;
-
+  // R-SET-1 sample-set selection. The combined status uses unchanged
+  // precedence (constraint > needs-investigation > ready). Within the winning
+  // tier (candidates whose status equals the combined status), numeric budget
+  // checks select the highest budgetUtilization — largest exceedance in the
+  // constraint tier, closest-to-budget in the ready tier — with ties broken by
+  // input order. Checks with no magnitude (latency, protection, and numeric
+  // checks whose tier is needs-investigation because the estimate was unknown)
+  // select the earliest sample at the winning status: unknowns have no
+  // magnitude, latency and protection have no budget denominator in V1, and M2
+  // derives a single weekly latency P95 so per-sample latency variation is not
+  // a selection signal. A tier mixing numeric and null utilizations is guarded
+  // by treating null as lowest. The returned CheckResult keeps the selected
+  // sample's evidence, findings, headroom, and utilizations.
   const dimensions: DimensionResult[] = perSample[0].dimensions.map((d0, di) => {
     const checks: CheckResult[] = d0.checks.map((_c0, ci) => {
       const candidates = perSample.map((a) => ({
@@ -102,11 +111,29 @@ export function assessSampleSet(
         check: a.dimensions[di].checks[ci],
       }));
       const combined = combineStatuses(candidates.map((c) => c.check.status));
-      const worst = candidates.reduce((best, c) =>
-        rank(c.check.status) > rank(best.check.status) ? c : best,
-      );
-      // Keep the worst sample's detail so evidence and findings stay sample-aligned.
-      return { ...worst.check, status: combined, worstSampleId: worst.sampleId };
+      const tier = candidates.filter((c) => c.check.status === combined);
+      const anyNumeric = tier.some((c) => c.check.budgetUtilization !== null);
+      let worst;
+      let selectionBasis: CheckResult['selectionBasis'];
+      if (anyNumeric) {
+        worst = tier.reduce((best, c) =>
+          (c.check.budgetUtilization ?? Number.NEGATIVE_INFINITY) >
+          (best.check.budgetUtilization ?? Number.NEGATIVE_INFINITY)
+            ? c
+            : best,
+        );
+        selectionBasis = 'highest-budget-utilization';
+      } else {
+        worst = tier[0];
+        selectionBasis = 'earliest-at-status';
+      }
+      return {
+        ...worst.check,
+        status: combined,
+        worstSampleId: worst.sampleId,
+        selectionBasis,
+        tierSampleIds: tier.map((t) => t.sampleId),
+      };
     });
     return dimension(d0.dimension, checks);
   });

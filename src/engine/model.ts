@@ -153,8 +153,12 @@ export interface CheckResult {
   budgetUtilization: number | null;
   limitUtilization: number | null;
   findings: Finding[];
-  /** Set by assessSampleSet: the sample that drove this check's status. */
+  /** Set by assessSampleSet: the sample whose evidence this check retains. */
   worstSampleId?: string;
+  /** Set by assessSampleSet: how the worst sample was chosen within its tier. */
+  selectionBasis?: 'highest-budget-utilization' | 'earliest-at-status';
+  /** Set by assessSampleSet: all sample ids at the winning status tier, input order. */
+  tierSampleIds?: string[];
 }
 
 export type Dimension = 'capacity' | 'iops' | 'throughput' | 'latency' | 'protection' | 'growth';

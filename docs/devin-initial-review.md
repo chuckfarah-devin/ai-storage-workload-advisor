@@ -222,6 +222,7 @@ Requirement IDs are proposed here so tests can reference them; they should be co
 | R-LAT-1 | Baseline P95 vs target; post-addition always needs investigation (tech §Rules, D-4a) | M1 | fixtures with P95 above/below target; post-addition never ready |
 | R-PRO-1 | Capability matching; unknown → investigation; shortfall → constraint (tech §Rules, D-5) | M1 | 2-failure requirement vs RAID 5; replication unknown vs none-required; snapshots missing |
 | R-STAT-1 | Precedence constraint > unknown > ready at sub-check, dimension and overall level (tech §Rules) | M1 | truth-table test |
+| R-SET-1 | Sample-set selection: precedence tiers, highest budget utilization within numeric tiers, earliest-at-status for non-numeric/unknown, aligned evidence retained | M1 | r-set-1-sample-set-selection.test.ts |
 | R-WHAT-1 | Multipliers 1/1.5/2 apply to proposed IOPS, throughput, backend; not capacity (E-6) | M1 | RAG 2× FE constraint; capacity unchanged |
 | R-FIND-1 | Every finding has rule ID, inputs, calculation, implication, next investigation, confidence, assumptions (tech §Findings) | M1 | schema test over all findings from the four combinations |
 | R-TS-1 | Exactly 10,080 minute records, aligned UTC timestamps, fixed days (tech §Time-series) | M2 | count and timestamp monotonicity |

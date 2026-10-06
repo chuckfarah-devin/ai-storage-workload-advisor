@@ -8,7 +8,7 @@ Executed October 6, 2026, on the uncommitted M1 working tree:
 |---|---|---|
 | Type-check | `npm run typecheck` (`tsc --noEmit -p tsconfig.app.json`) | 0 errors |
 | Lint | `npm run lint` (oxlint) | 0 warnings, 0 errors (39 files, 116 rules) |
-| Engine test suite | `npm test` (`vitest run`) | 17 test files, 92 tests, all passed |
+| Engine test suite | `npm test` (`vitest run`) | 18 test files, 100 tests, all passed |
 | Golden per-sample assessments | `npm run golden` (`tsx scripts/golden.ts`) | regenerated `tests/golden/*.json` (18 files) and `docs/verification/m1/golden-assessments.md`; golden test confirms engine output reproduces the committed fixtures |
 
 Rendered per-sample rule output for review: [docs/verification/m1/golden-assessments.md](verification/m1/golden-assessments.md) — plain-text `renderAssessmentText` for every infrastructure × workload × sample combination at baseline (1×, horizon 1), plus what-if renders for the burst samples (1.5×/2× demand, 0/1/3-year horizons).

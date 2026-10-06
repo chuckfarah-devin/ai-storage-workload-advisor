@@ -30,6 +30,7 @@ Requirement IDs are defined in `docs/devin-initial-review.md` §6.1.
 | R-LAT-1 | Baseline P95 vs target; post-addition always needs investigation | `tests/engine/r-lat-1-latency.test.ts` |
 | R-PRO-1 | Capability matching; unknown → investigation; shortfall → constraint | `tests/engine/r-pro-1-protection.test.ts` |
 | R-STAT-1 | Precedence constraint > unknown > ready at every level | `tests/engine/r-stat-1-precedence.test.ts` |
+| R-SET-1 | Sample-set selection: precedence tiers, highest budget utilization within numeric tiers, earliest-at-status for non-numeric/unknown, aligned evidence retained | `tests/engine/r-set-1-sample-set-selection.test.ts` |
 | R-WHAT-1 | Multipliers apply to proposed IOPS/throughput/backend, not capacity | `tests/engine/r-what-1-whatif.test.ts` |
 | R-FIND-1 | Every finding has rule ID, inputs, calculation, implication, next investigation, confidence, assumptions | `tests/engine/r-find-1-findings.test.ts` |
 | Golden | Per-sample assessments for all combos equal committed fixtures | `tests/engine/golden.test.ts`, `tests/fixtures/samples.ts`, `tests/golden/*.json` |
@@ -50,8 +51,8 @@ Requirement IDs are defined in `docs/devin-initial-review.md` §6.1.
 `npm test` (vitest run), executed October 6, 2026:
 
 ```
-Test Files  17 passed (17)
-     Tests  92 passed (92)
+Test Files  18 passed (18)
+     Tests  100 passed (100)
   Duration  ~1s
 ```
 
