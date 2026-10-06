@@ -1,0 +1,25 @@
+# AI Storage Workload Advisor
+## Implementation plan — proposed 0.2
+
+Version history: 0.1 reviewed baseline (October 6, 2026); 0.2 edit E-7 applied and milestone structure M0–M4 adopted from docs/devin-initial-review.md §6 (October 6, 2026).
+
+Chuck approved the 80% operating budget and resolved the first-review decisions on October 6, 2026 (DECISIONS.md). Milestones M0 (repository foundation and spec freeze) and M1 (static engine and tests) were authorized together; M2 (trace, aggregation, time-series rules), M3 (interface) and M4 (browser verification and findings) each require separate authorization. Detailed acceptance criteria and the requirement-to-test map are in docs/devin-initial-review.md §6 and docs/tests.md.
+
+1. **Question and research:** Record the decision audience and scenario definitions. Research official sources for workload concepts and unit semantics; separate sourced facts from synthetic assumptions. Chuck reviews profile plausibility, the operating-budget policy, and latency limitations.
+2. **Specifications:** Reconcile business success criteria with the technical rule that unknown post-addition latency prevents an unconditional ready result. Freeze a small first-build specification and record decision rationale and deferred scope.
+3. **Repository foundation:** Establish the public-facing README and documentation paths for Question → Research → Business Spec → Technical Spec → Build → Tests → Verification → Findings. Stack selected October 6, 2026: Vite, TypeScript, React, Vitest, Playwright (DECISIONS.md). The extracted handoff folder is the local repository; a GitHub remote is a later decision, and no remote exists for this deliverable.
+4. **Synthetic data and assessment:** Create two synthetic infrastructure profiles (protection-layout variants, RAID 5 vs RAID 6, with equal declared raw capacity and limits) and two workload profiles, with explicit assumptions and aligned units. Build normalization, validation, and deterministic rules first (M1, operating on individual aligned demand samples); add the deterministic trace, aggregation and weekly statistics afterwards (M2). Add meaningful tests for boundaries, missing evidence, growth, throughput, and protection. Internal test fixtures can cover constraints without adding UI profile editing.
+5. **Demonstrable interface:** Build profile selection, the six readiness dimensions, explained findings, preset what-if controls, and baseline comparison. Display educational/synthetic labels throughout. Avoid adding live integrations or a runtime AI dependency.
+6. **Verification and findings:** Verify both scenarios against calculations; check preset controls and accessible labels. Produce a five-minute walkthrough and a findings document covering what the model establishes, what remains unknown, and what a next version would require. Record test outcomes and screenshots as verification evidence.
+
+### Completion criteria
+
+Implement the two observation views from a shared deterministic seven-day minute trace: 24-hour detail (1,440 records) and seven-day ten-minute display (1,008 buckets). Include weekly minute-based summary statistics, exceedance duration, representative-day selection, and aligned baseline/proposed comparisons. Verify that aggregation cannot hide a known constraint. This is part of the synthetic-data/assessment and demonstrable-interface milestones, not an additional live-data feature.
+
+Include the bounded backend-IOPS extension in the data/rules milestone: fixed RAID 5/RAID 6 profiles, explicit cache and write-policy assumptions, separate front-end/backend checks, and operation-overhead comparison. Verify the worked 19,000-versus-25,000 example and demonstrate a backend constraint despite available front-end headroom. Keep full-stripe, rebuild, and implementation-specific erasure-coding models deferred.
+
+A visitor can understand a proposed VMware/private-cloud or AI/RAG addition, inspect supporting evidence, and see how a what-if changes the assessment. Every result traces to versioned rules and synthetic inputs. Tests pass; manual scenario checks are recorded; no unsupported integration or sizing claims appear. Chuck's storage/product judgment and direction of AI agents are evident in the specifications, decisions, and findings.
+
+### Scope boundary
+
+Finish the assessment-to-explanation loop before expanding features. Profile editing, replication changes, failure simulation, consolidation, additional workload packs, and real-source adapters stay in the backlog. If the first demo cannot explain its assumptions clearly, simplify the model before adding UI or scenarios.
