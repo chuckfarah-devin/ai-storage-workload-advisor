@@ -1,0 +1,46 @@
+{
+  "id": "INF-B",
+  "schemaVersion": "1.0.0",
+  "synthetic": true,
+  "name": "Midrange all-flash, RAID 6 (8+2)",
+  "description": "Synthetic vendor-neutral midrange all-flash array with RAID 6 (8 data + 2 parity). Educational demonstration profile; not a real array.",
+  "provenance": "synthetic educational assumption; see docs/synthetic-profile-proposal.md",
+  "assumptions": [
+    "write-back cache with no write coalescing; every logical write destages as one modeled backend block",
+    "no rebuild or degraded-state activity is modeled",
+    "single declared read-cache hit fraction of 0.30 is a simplification applied to all logical reads",
+    "spares and metadata reserves are excluded from usable capacity",
+    "equal declared limits across protection-layout variants are a comparison device, not identical hardware"
+  ],
+  "capacity": {
+    "usableBytes": 197912092999680,
+    "usedBytes": 109951162777600,
+    "annualGrowthFraction": 0.15
+  },
+  "limits": {
+    "frontendIops": 150000,
+    "throughputBytesPerSecond": 3145728000,
+    "backendOpsPerSecond": 250000
+  },
+  "backend": {
+    "layout": "raid6",
+    "dataWidth": 8,
+    "parityWidth": 2,
+    "backendBlockBytes": 16384,
+    "readCacheHitFraction": 0.3,
+    "writePolicy": "write-back-no-coalescing",
+    "backgroundBackendOpsPerSecond": 0,
+    "existingBackendBasis": "derived-from-logical-trace"
+  },
+  "protection": {
+    "toleratedDriveFailures": 2,
+    "snapshots": true,
+    "encryptionAtRest": true,
+    "replication": "unknown"
+  },
+  "baselineLatency": {
+    "p95Ms": 1.2,
+    "maxMs": 1.4,
+    "basis": "synthetic weekly values declared for M1; M2 derives them from the trace"
+  }
+}

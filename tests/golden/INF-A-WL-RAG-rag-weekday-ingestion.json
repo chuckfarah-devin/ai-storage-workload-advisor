@@ -1,0 +1,465 @@
+{
+  "rulesetVersion": "1.0.0-m1",
+  "budgetFraction": 0.8,
+  "infrastructureId": "INF-A",
+  "workloadId": "WL-RAG",
+  "sampleId": "rag-weekday-ingestion",
+  "options": {
+    "demandMultiplier": 1,
+    "horizonYears": 1
+  },
+  "dimensions": [
+    {
+      "dimension": "capacity",
+      "status": "modeled-ready",
+      "checks": [
+        {
+          "id": "capacity",
+          "status": "modeled-ready",
+          "headroom": {
+            "value": 32985348833280,
+            "unit": "bytes"
+          },
+          "budgetUtilization": 0.8125,
+          "limitUtilization": 0.65,
+          "findings": [
+            {
+              "ruleId": "R-CAP-1",
+              "condition": "Combined used plus proposed capacity is within the capacity operating budget.",
+              "evidence": [
+                {
+                  "label": "existing used capacity",
+                  "value": 109951162777600,
+                  "unit": "bytes",
+                  "basis": "aligned demand sample"
+                },
+                {
+                  "label": "proposed workload capacity",
+                  "value": 32985348833280,
+                  "unit": "bytes",
+                  "basis": "synthetic workload profile"
+                },
+                {
+                  "label": "capacity operating budget",
+                  "value": 175921860444160,
+                  "unit": "bytes",
+                  "basis": "0.8 × usable capacity"
+                },
+                {
+                  "label": "usable capacity limit",
+                  "value": 219902325555200,
+                  "unit": "bytes",
+                  "basis": "synthetic infrastructure profile"
+                }
+              ],
+              "calculation": "100 TiB used + 30 TiB proposed = 130 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 30 TiB.",
+              "implication": "Modeled capacity headroom exists for the proposed workload at the declared synthetic values.",
+              "nextInvestigation": "Confirm real usable capacity and current consumption before relying on this result.",
+              "confidence": "high",
+              "confidenceRationale": "Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.",
+              "assumptions": [
+                "Usable capacity excludes spares and metadata reserves."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dimension": "iops",
+      "status": "needs-investigation",
+      "checks": [
+        {
+          "id": "iops.frontend",
+          "status": "modeled-ready",
+          "headroom": {
+            "value": 80000,
+            "unit": "IOPS"
+          },
+          "budgetUtilization": 0.3333333333333333,
+          "limitUtilization": 0.26666666666666666,
+          "findings": [
+            {
+              "ruleId": "R-FE-1",
+              "condition": "Combined front-end IOPS demand is within the front-end operating budget.",
+              "evidence": [
+                {
+                  "label": "existing front-end IOPS",
+                  "value": 20000,
+                  "unit": "IOPS",
+                  "basis": "aligned demand sample (reads + writes)"
+                },
+                {
+                  "label": "proposed front-end IOPS",
+                  "value": 20000,
+                  "unit": "IOPS",
+                  "basis": "aligned demand sample (reads + writes)"
+                },
+                {
+                  "label": "front-end IOPS operating budget",
+                  "value": 120000,
+                  "unit": "IOPS",
+                  "basis": "0.8 × sustainable front-end IOPS limit"
+                },
+                {
+                  "label": "sustainable front-end IOPS limit",
+                  "value": 150000,
+                  "unit": "IOPS",
+                  "basis": "synthetic infrastructure profile"
+                }
+              ],
+              "calculation": "20000 existing + 20000 proposed = 40000 IOPS vs 120000 budget; headroom 80000 IOPS.",
+              "implication": "Front-end logical IOPS headroom exists for the proposed workload.",
+              "nextInvestigation": "Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.",
+              "confidence": "high",
+              "confidenceRationale": "Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.",
+              "assumptions": [
+                "Existing and proposed demand are aligned to the same modeled interval."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "iops.backend",
+          "status": "needs-investigation",
+          "headroom": null,
+          "budgetUtilization": null,
+          "limitUtilization": null,
+          "findings": [
+            {
+              "ruleId": "R-BE-3",
+              "condition": "Backend operation demand cannot be estimated for this sample.",
+              "evidence": [
+                {
+                  "label": "backend estimate",
+                  "value": null,
+                  "unit": "ops/s",
+                  "basis": "backend model",
+                  "missingReason": "proposed IO size exceeds the modeled backend block (read 65536 bytes, write 65536 bytes, backend block 16384 bytes); the classic read-modify-write factor does not apply; full-stripe or multi-block behavior is outside V1 scope."
+                },
+                {
+                  "label": "existing read block",
+                  "value": 16384,
+                  "unit": "bytes",
+                  "basis": "aligned demand sample"
+                },
+                {
+                  "label": "existing write block",
+                  "value": 8192,
+                  "unit": "bytes",
+                  "basis": "aligned demand sample"
+                },
+                {
+                  "label": "proposed read block",
+                  "value": 65536,
+                  "unit": "bytes",
+                  "basis": "aligned demand sample"
+                },
+                {
+                  "label": "proposed write block",
+                  "value": 65536,
+                  "unit": "bytes",
+                  "basis": "aligned demand sample"
+                },
+                {
+                  "label": "modeled backend block",
+                  "value": 16384,
+                  "unit": "bytes",
+                  "basis": "synthetic infrastructure profile"
+                }
+              ],
+              "calculation": "No backend estimate produced: proposed IO size exceeds the modeled backend block (read 65536 bytes, write 65536 bytes, backend block 16384 bytes); the classic read-modify-write factor does not apply; full-stripe or multi-block behavior is outside V1 scope.",
+              "implication": "The backend load for this demand sample is unknown; the IOPS dimension cannot be unconditionally ready.",
+              "nextInvestigation": "Determine the real backend behavior for this IO profile (full-stripe or multi-block handling is outside V1) or bound the demand to the modeled block size.",
+              "confidence": "insufficient",
+              "confidenceRationale": "An unknown participates: the model deliberately refuses to extrapolate.",
+              "assumptions": [
+                "The classic read-modify-write model applies only when read and write block sizes are at or below the modeled backend block."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dimension": "throughput",
+      "status": "modeled-ready",
+      "checks": [
+        {
+          "id": "throughput",
+          "status": "modeled-ready",
+          "headroom": {
+            "value": 927334400,
+            "unit": "bytes/second"
+          },
+          "budgetUtilization": 0.6315104166666666,
+          "limitUtilization": 0.5052083333333334,
+          "findings": [
+            {
+              "ruleId": "R-THR-1",
+              "condition": "Combined throughput demand is within the throughput operating budget.",
+              "evidence": [
+                {
+                  "label": "existing throughput",
+                  "value": 278528000,
+                  "unit": "bytes/second",
+                  "basis": "derived: existing IOPS × block sizes"
+                },
+                {
+                  "label": "proposed throughput",
+                  "value": 1310720000,
+                  "unit": "bytes/second",
+                  "basis": "derived: proposed IOPS × block sizes"
+                },
+                {
+                  "label": "throughput operating budget",
+                  "value": 2516582400,
+                  "unit": "bytes/second",
+                  "basis": "0.8 × sustainable throughput limit"
+                },
+                {
+                  "label": "sustainable throughput limit",
+                  "value": 3145728000,
+                  "unit": "bytes/second",
+                  "basis": "synthetic infrastructure profile"
+                }
+              ],
+              "calculation": "existing 265.63 MiB/s (272000 KiB/s) + proposed 1250 MiB/s = 1515.63 MiB/s vs 2400 MiB/s budget; headroom 884.38 MiB/s.",
+              "implication": "Modeled sustained bandwidth headroom exists for the proposed workload.",
+              "nextInvestigation": "Verify sustained throughput limits and the read/write block-size mix; derived throughput depends on both.",
+              "confidence": "high",
+              "confidenceRationale": "Derived directly from declared IOPS and block sizes; synthetic values, not a measured limit.",
+              "assumptions": [
+                "Throughput is derived from IOPS × block size, never an independent input."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dimension": "latency",
+      "status": "needs-investigation",
+      "checks": [
+        {
+          "id": "latency",
+          "status": "needs-investigation",
+          "headroom": null,
+          "budgetUtilization": null,
+          "limitUtilization": null,
+          "findings": [
+            {
+              "ruleId": "R-LAT-1",
+              "condition": "Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.",
+              "evidence": [
+                {
+                  "label": "baseline P95 latency",
+                  "value": 1.2,
+                  "unit": "ms",
+                  "basis": "aligned demand sample (screening indicator)"
+                },
+                {
+                  "label": "baseline maximum latency",
+                  "value": 1.4,
+                  "unit": "ms",
+                  "basis": "aligned demand sample"
+                },
+                {
+                  "label": "workload latency target",
+                  "value": 1.5,
+                  "unit": "ms",
+                  "basis": "synthetic workload profile"
+                }
+              ],
+              "calculation": "baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.",
+              "implication": "No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.",
+              "nextInvestigation": "Establish post-addition latency with a validated response model or measurements; V1 cannot.",
+              "confidence": "insufficient",
+              "confidenceRationale": "Post-addition latency is an unknown in V1 by design.",
+              "assumptions": [
+                "Baseline P95 is a screening indicator only; the maximum is shown alongside.",
+                "Post-addition latency unknown: no validated response curve in V1."
+              ]
+            },
+            {
+              "ruleId": "R-LAT-1",
+              "condition": "Baseline maximum latency is reported alongside P95 as context.",
+              "evidence": [
+                {
+                  "label": "baseline maximum latency",
+                  "value": 1.4,
+                  "unit": "ms",
+                  "basis": "aligned demand sample"
+                },
+                {
+                  "label": "workload latency target",
+                  "value": 1.5,
+                  "unit": "ms",
+                  "basis": "synthetic workload profile"
+                }
+              ],
+              "calculation": "baseline max 1.4 ms vs target 1.5 ms; the max is context, not the screening statistic.",
+              "implication": "Single-interval maxima can exceed the target even when P95 does not; both are baseline evidence only.",
+              "nextInvestigation": "Review the distribution of minute latencies in the M2 weekly statistics.",
+              "confidence": "high",
+              "confidenceRationale": "Reported value from supplied evidence; no inference made.",
+              "assumptions": [
+                "Latency evidence is synthetic baseline data for the existing environment only."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dimension": "protection",
+      "status": "modeled-ready",
+      "checks": [
+        {
+          "id": "protection",
+          "status": "modeled-ready",
+          "headroom": null,
+          "budgetUtilization": null,
+          "limitUtilization": null,
+          "findings": [
+            {
+              "ruleId": "R-PRO-1",
+              "condition": "All declared workload protection requirements are satisfied by the infrastructure capabilities.",
+              "evidence": [
+                {
+                  "label": "minimum tolerated drive failures required",
+                  "value": 1,
+                  "unit": "count",
+                  "basis": "workload protection requirement"
+                },
+                {
+                  "label": "tolerated drive failures",
+                  "value": 1,
+                  "unit": "count",
+                  "basis": "synthetic infrastructure profile"
+                },
+                {
+                  "label": "snapshots required",
+                  "value": true,
+                  "unit": "flag",
+                  "basis": "workload protection requirement"
+                },
+                {
+                  "label": "snapshots capability",
+                  "value": true,
+                  "unit": "flag",
+                  "basis": "synthetic infrastructure profile"
+                },
+                {
+                  "label": "encryptionAtRest required",
+                  "value": true,
+                  "unit": "flag",
+                  "basis": "workload protection requirement"
+                },
+                {
+                  "label": "encryptionAtRest capability",
+                  "value": true,
+                  "unit": "flag",
+                  "basis": "synthetic infrastructure profile"
+                },
+                {
+                  "label": "replication required",
+                  "value": "none",
+                  "unit": "mode",
+                  "basis": "workload protection requirement"
+                },
+                {
+                  "label": "replication capability",
+                  "value": "unknown",
+                  "unit": "mode",
+                  "basis": "synthetic infrastructure profile",
+                  "missingReason": "replication capability not modeled"
+                }
+              ],
+              "calculation": "Capability matching over the fixed V1 vocabulary: toleratedDriveFailures: required 1 vs available 1 → modeled-ready; snapshots: required true vs available true → modeled-ready; encryptionAtRest: required true vs available true → modeled-ready; replication: required none vs available unknown → modeled-ready.",
+              "implication": "Declared protection capabilities meet the workload requirements within the V1 vocabulary.",
+              "nextInvestigation": "Confirm capabilities on the real array; vocabulary coverage is selected capabilities only.",
+              "confidence": "moderate",
+              "confidenceRationale": "Declared capability matching only; not a complete availability assurance.",
+              "assumptions": [
+                "The V1 capability vocabulary covers selected capabilities, not complete availability assurance.",
+                "Replication is not equated with backup; availability is not inferred from a single feature."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dimension": "growth",
+      "status": "modeled-ready",
+      "checks": [
+        {
+          "id": "growth",
+          "status": "modeled-ready",
+          "headroom": {
+            "value": 3298534883328,
+            "unit": "bytes"
+          },
+          "budgetUtilization": 0.98125,
+          "limitUtilization": 0.785,
+          "findings": [
+            {
+              "ruleId": "R-GRO-1",
+              "condition": "Projected capacity at the 1-year horizon is within the capacity operating budget.",
+              "evidence": [
+                {
+                  "label": "existing used capacity",
+                  "value": 109951162777600,
+                  "unit": "bytes",
+                  "basis": "aligned demand sample"
+                },
+                {
+                  "label": "existing annual growth fraction",
+                  "value": 0.15,
+                  "unit": "fraction",
+                  "basis": "synthetic infrastructure profile"
+                },
+                {
+                  "label": "proposed workload capacity",
+                  "value": 32985348833280,
+                  "unit": "bytes",
+                  "basis": "synthetic workload profile"
+                },
+                {
+                  "label": "proposed annual growth fraction",
+                  "value": 0.4,
+                  "unit": "fraction",
+                  "basis": "synthetic workload profile"
+                },
+                {
+                  "label": "planning horizon",
+                  "value": 1,
+                  "unit": "years",
+                  "basis": "assessment option"
+                },
+                {
+                  "label": "capacity operating budget",
+                  "value": 175921860444160,
+                  "unit": "bytes",
+                  "basis": "0.8 × usable capacity"
+                }
+              ],
+              "calculation": "projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 160 TiB budget; headroom 3 TiB.",
+              "implication": "The modeled environment retains capacity headroom at the 1-year planning horizon.",
+              "nextInvestigation": "Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.",
+              "confidence": "high",
+              "confidenceRationale": "Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.",
+              "assumptions": [
+                "Annual growth fractions are synthetic assumptions, not observed trends.",
+                "Horizon is 1 year(s); horizon 0 equals the current-capacity check."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "overall": "needs-investigation",
+  "label": "Synthetic data. Educational demonstration; not vendor sizing or production configuration guidance."
+}
