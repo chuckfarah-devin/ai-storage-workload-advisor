@@ -8,6 +8,7 @@ npm test            # vitest run — engine suite under tests/engine
 npm run typecheck   # tsc --noEmit -p tsconfig.app.json (src + tests + scripts)
 npm run lint        # oxlint
 npm run golden      # regenerate tests/golden/*.json and docs/verification/m1/golden-assessments.md
+npm run e2e         # Playwright browser checks (desktop + mobile); reuses a dev server on :5173
 ```
 
 Requirement IDs are defined in `docs/devin-initial-review.md` §6.1.
@@ -59,21 +60,25 @@ Requirement IDs are defined in `docs/devin-initial-review.md` §6.1.
 | R-UI-1 | View model: rate-unit selection (decimal MB/s–GB/s, one unit per chart incl. budget/ceiling), schedule-derived presets with explained absence, export bundle fields, what-if bundle, all-combination assess | `tests/ui/viewModel.test.ts` |
 | R-UI-2 | Component smoke: label, banner status, workload/what-if switching, hidden-burst readout, preset note, no predicted-latency claims, preview controls don't alter assessment | `tests/ui/App.test.tsx` |
 | — | Zero-coverage contract and coverage-downgrade wording (Part A engine fix) | `tests/engine/r-ts-7-coverage.test.ts` |
+| — | `bucketLabel` derives labels from bucket UTC timestamps (Mon 10:00 / Sun 23:50) | `tests/ui/viewModel.test.ts` |
+| — | `minuteReadout` scaled breakdown, explicit units, missing/unknown discrimination, additivity invariant | `tests/ui/viewModel.test.ts` |
+| — | `formatHeadroom` binary units; `latencyCard`/`protectionCard` non-budget card data | `tests/ui/viewModel.test.ts` |
+| — | Card vocabulary/units; nightly note only under selected preset | `tests/ui/App.test.tsx` |
+| — | Detail day selector: re-extraction, Saturday preset unavailable, engine-default reason | `tests/ui/viewModel.test.ts`, `tests/ui/App.test.tsx` |
+| R-UI-3 | Narrow layout: no horizontal overflow at 375 px, panels stack, SVG axes and non-overlapping Y1/Y2 labels, wrapped legend | `tests/e2e/advisor.spec.ts` (Playwright, mobile project) |
+| R-UI-4 | No PowerMax/ONTAP/validated/production-sizing claims; no predicted post-addition latency | `tests/e2e/advisor.spec.ts` (Playwright, both projects) |
+| — | Browser checks: four combinations, what-ifs, weekly/detail inspection, exports, screenshots | `tests/e2e/advisor.spec.ts` |
 
-## Not yet implemented
+## Executed results history
 
-| Req ID | Milestone |
-|---|---|
-| R-UI-3 (narrow screen), R-UI-4 (no vendor claims) | M4 |
+| Milestone | Date | Result |
+|---|---|---|
+| M1 | 2026-10-06 | `npm test`: 17 files / 92 tests passed |
+| R-SET-1 | 2026-10-06 | `npm test`: 18 files / 100 tests passed |
+| M2 | 2026-10-07 | `npm test`: 30 files / 150 tests passed |
+| M3 | 2026-10-07 | `npm test`: 32 files / 171 tests passed |
+| M3 corrections + M4 | 2026-10-07 | `npm test`: 32 files / 179 tests passed; `npm run e2e` (Playwright): 15 passed, 3 project-gated skips |
+| M4 review fixes | 2026-10-07 | `npm test`: 32 files / 183 tests passed; `npm run e2e` (Playwright): 15 passed, 3 project-gated skips |
 
-## Last executed results
-
-`npm test` (vitest run), executed October 6, 2026:
-
-```
-Test Files  32 passed (32)
-     Tests  171 passed (171)
-```
-
-`npm run typecheck` — 0 errors. `npm run lint` (oxlint) — 0 warnings, 0 errors.
-`npm run golden` — regenerated `tests/golden/` M1 fixtures (capacity/growth-only diff after ENV-1…ENV-5), `tests/golden/m2/*.json` (4 files), and `docs/verification/m2/weekly-summaries.md`; both golden tests confirm reproduction.
+Latest run (October 7, 2026): `npm run typecheck` — 0 errors; `npm run lint` — 0 warnings, 0 errors (77 files); `npm run build` — `dist/assets/index-*.js` 311.38 kB (92.75 kB gzip).
+`npm run golden` regenerated `tests/golden/` M1 fixtures and `tests/golden/m2/*.json` with wording-only diffs ('validated' → 'measured'/'response curve' phrasing for R-UI-4); both golden tests confirm reproduction.

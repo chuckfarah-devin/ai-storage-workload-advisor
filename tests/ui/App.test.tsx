@@ -44,9 +44,24 @@ describe('App (default INF-B × WL-VM)', () => {
     expect(readouts[0].textContent).toContain('206,100');
   });
 
-  it('nightly preset carries the not-modeled note', () => {
+  it('nightly note appears only when the nightly preset is selected', () => {
     renderApp();
-    expect(screen.getAllByText(/not modeled/i).length).toBeGreaterThan(0);
+    expect(screen.queryByText(/Backup completion\/window compliance not modeled/)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Morning burst' }));
+    expect(screen.queryByText(/Backup completion\/window compliance not modeled/)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Nightly batch' }));
+    expect(screen.getByText(/Backup completion\/window compliance not modeled/)).toBeInTheDocument();
+  });
+
+  it('cards use binary units and non-budget vocabulary for latency/protection', () => {
+    renderApp();
+    expect(screen.getAllByText(/TiB$/).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Post-addition latency: unknown/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Baseline P95/).length).toBeGreaterThan(0);
+    expect(screen.getByText('Requirements met (declared)')).toBeInTheDocument();
+    expect(screen.getByText(/Selected capabilities, not whole-system availability/)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'IOPS' })).toBeInTheDocument();
+    expect(screen.queryByText(/unknown of operating budget/)).not.toBeInTheDocument();
   });
 
   it('no text claims post-addition latency is predicted', () => {
@@ -60,5 +75,12 @@ describe('App (default INF-B × WL-VM)', () => {
     const bannerBefore = screen.getByLabelText('Decision summary').textContent;
     fireEvent.change(screen.getByLabelText('Host connection preview'), { target: { value: 'tcp100' } });
     expect(screen.getByLabelText('Decision summary').textContent).toBe(bannerBefore);
+  });
+
+  it('day selector to Saturday disables morning burst with an explanation', () => {
+    renderApp();
+    fireEvent.change(screen.getByLabelText('Detail day'), { target: { value: '5' } });
+    expect(screen.getByText(/Engine default: Monday/)).toBeInTheDocument();
+    expect(screen.getByText(/No morning burst window is scheduled on Saturday/)).toBeInTheDocument();
   });
 });

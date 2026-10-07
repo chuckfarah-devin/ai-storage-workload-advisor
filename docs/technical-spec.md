@@ -2,7 +2,7 @@
 ## Technical Specification — proposed 0.2
 
 Depends on Business/Product Specification 0.3. This is a design document; milestone M1 implements the static engine described in §Assessment rules and §Backend, and later milestones implement the rest.  
-Version history: 0.1 reviewed baseline (October 6, 2026); 0.2 first-review edits E-3, E-4, E-5, E-6, E-9, E-10, E-11, E-12, E-13, E-15, E-16 applied per DECISIONS.md resolutions (October 6, 2026); 0.2.1 sample-set selection semantics (R-SET-1); 0.3 environment block (ENV-1…ENV-5) and M2 trace engine implementation notes (October 6, 2026); 0.3.1 M3 UI contract notes (October 7, 2026). Requirement/rule identifiers R-* are defined in docs/devin-initial-review.md §6.1 and docs/tests.md.
+Version history: 0.1 reviewed baseline (October 6, 2026); 0.2 first-review edits E-3, E-4, E-5, E-6, E-9, E-10, E-11, E-12, E-13, E-15, E-16 applied per DECISIONS.md resolutions (October 6, 2026); 0.2.1 sample-set selection semantics (R-SET-1); 0.3 environment block (ENV-1…ENV-5) and M2 trace engine implementation notes (October 6, 2026); 0.3.1 M3 UI contract notes (October 7, 2026); 0.3.2 M3-correction/M4 UI contract notes (October 7, 2026). Requirement/rule identifiers R-* are defined in docs/devin-initial-review.md §6.1 and docs/tests.md.
 
 ### Architecture
 
@@ -114,6 +114,10 @@ V1 implements only the bundled synthetic source. PowerMax REST and ONTAP REST ar
 Reject negative values, invalid fractions, nonpositive limits, used capacity above usable capacity, incompatible demand windows, and non-synthetic V1 input. Show incomplete evidence explicitly.
 
 Test unit normalization, operating-budget boundaries, compounded growth, weighted throughput, missing evidence, protection mismatches, status precedence, and reproducibility. Verify both workload scenarios manually: explain each result from the fixture and rule; exercise growth controls; confirm readable narrow-screen layout and labels. No live-array validation is claimed.
+
+### UI readout contract (0.3.2)
+
+The minute readout (`minuteReadout` in `src/ui/viewModel.ts`) is a discriminated result — `missing` ('missing interval'), `unknown` ('unknown — \<reason\>'), or `value` with an existing + proposed (+ background) = combined breakdown. The proposed component carries the what-if multiplier; units are explicit (IOPS, ops/s, or the chart's decimal rate unit) and the function throws if the components fail to sum to combined within 1e-6 relative — a breakdown mismatch can never silently render. Null or unknown demand never prints 'within budget'. Bucket labels come from the bucket's UTC timestamp, not index arithmetic. A detail-day selector re-derives the day's records, derived minutes, and presets from the engine outputs; non-default days show the engine's selection reason. Browser verification (M4) runs Playwright on desktop and mobile viewports.
 
 ### Open design choices
 

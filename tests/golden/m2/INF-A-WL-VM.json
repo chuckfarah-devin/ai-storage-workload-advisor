@@ -63,7 +63,7 @@
                 "implication": "Modeled capacity headroom exists for the proposed workload at the declared synthetic values.",
                 "nextInvestigation": "Confirm real usable capacity and current consumption before relying on this result.",
                 "confidence": "high",
-                "confidenceRationale": "Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.",
+                "confidenceRationale": "Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.",
                 "assumptions": [
                   "Usable capacity excludes spares and metadata reserves."
                 ]
@@ -168,7 +168,7 @@
                 "implication": "Front-end logical IOPS headroom exists for the proposed workload.",
                 "nextInvestigation": "Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.",
                 "confidence": "high",
-                "confidenceRationale": "Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.",
+                "confidenceRationale": "Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.",
                 "assumptions": [
                   "Existing and proposed demand are aligned to the same modeled interval."
                 ]
@@ -421,7 +421,7 @@
             "findings": [
               {
                 "ruleId": "R-LAT-1",
-                "condition": "Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.",
+                "condition": "Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.",
                 "evidence": [
                   {
                     "label": "baseline P95 latency",
@@ -444,12 +444,12 @@
                 ],
                 "calculation": "baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.",
                 "implication": "No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.",
-                "nextInvestigation": "Establish post-addition latency with a validated response model or measurements; V1 cannot.",
+                "nextInvestigation": "Establish post-addition latency with a response model or measurements; V1 cannot.",
                 "confidence": "insufficient",
                 "confidenceRationale": "Post-addition latency is an unknown in V1 by design.",
                 "assumptions": [
                   "Baseline P95 is a screening indicator only; the maximum is shown alongside.",
-                  "Post-addition latency unknown: no validated response curve in V1."
+                  "Post-addition latency unknown: no response curve in V1."
                 ]
               },
               {
@@ -710,7 +710,7 @@
     },
     "defaultDay": {
       "dayIndex": 0,
-      "reason": "no budget exceedance; highest utilization ratio minute: backend operations 152100 vs budget 200000 (76.0% of budget) at 2026-10-05T10:05:00.000Z"
+      "reason": "no budget exceedance; highest utilization ratio minute: backend operations 152100 vs budget 200000 (76.0% of budget) at 2026-10-05T10:05:00Z"
     }
   },
   "bucketsMonday1000": [

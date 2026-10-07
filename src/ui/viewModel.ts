@@ -3,6 +3,8 @@
 import type {
   AssessmentOptions,
   CheckDelta,
+  CheckResult,
+  Evidence,
   InfrastructureProfile,
   ScheduleRow,
   TraceAssessment,
@@ -68,6 +70,7 @@ export interface AssessmentBundle {
   assessment: TraceAssessment;
   buckets: Bucket[];
   day: TraceRecord[];
+  dayIndex: number;
   derivedDay: DerivedMinute[];
   budgets: ReturnType<typeof traceBudgets>;
   ceilings: {
@@ -77,17 +80,22 @@ export interface AssessmentBundle {
   };
 }
 
-export function assess(scenario: Scenario, options: AssessmentOptions): AssessmentBundle {
+export function assess(
+  scenario: Scenario,
+  options: AssessmentOptions,
+  dayIndex?: number,
+): AssessmentBundle {
   const { infra, workload, trace } = scenario;
   const assessment = assessTrace(infra, workload, trace, options);
   const derived = deriveTraceMinutes(infra, trace, options.demandMultiplier);
   const budgets = traceBudgets(infra);
-  const dayIndex = assessment.defaultDay.dayIndex;
+  const dayIdx = dayIndex ?? assessment.defaultDay.dayIndex;
   return {
     assessment,
     buckets: bucketize(trace, derived, budgets),
-    day: extractDay(trace, dayIndex),
-    derivedDay: derived.slice(dayIndex * MINUTES_PER_DAY, (dayIndex + 1) * MINUTES_PER_DAY),
+    dayIndex: dayIdx,
+    day: extractDay(trace, dayIdx),
+    derivedDay: derived.slice(dayIdx * MINUTES_PER_DAY, (dayIdx + 1) * MINUTES_PER_DAY),
     budgets,
     ceilings: {
       frontendIops: infra.limits.frontendIops,
@@ -103,12 +111,24 @@ export interface WhatIfBundle {
   deltas: CheckDelta[];
 }
 
-export function baselineAndWhatIf(scenario: Scenario, options: AssessmentOptions): WhatIfBundle {
+export function baselineAndWhatIf(
+  scenario: Scenario,
+  options: AssessmentOptions,
+  dayIndex?: number,
+): WhatIfBundle {
   const baseline = assess(scenario, { demandMultiplier: 1, horizonYears: 1 });
   const selected =
     options.demandMultiplier === 1 && options.horizonYears === 1
       ? baseline
-      : assess(scenario, options);
+      : assess(scenario, options, dayIndex);
+  if (dayIndex !== undefined && selected.dayIndex !== dayIndex) {
+    // baseline was shared but a different day was requested — re-extract.
+    return {
+      baseline,
+      selected: assess(scenario, options, dayIndex),
+      deltas: compareAssessments(baseline.assessment, selected.assessment),
+    };
+  }
   return { baseline, selected, deltas: compareAssessments(baseline.assessment, selected.assessment) };
 }
 
@@ -186,6 +206,114 @@ export function presetWindows(baselineSchedule: ScheduleRow[], dayIndex: number)
   return presets;
 }
 
+/** Label a bucket/minute by its UTC timestamp: 'Mon 10:00'. Day names are
+ *  derived from the timestamp, never from an index. */
+export function bucketLabel(timestampUtc: string): string {
+  const d = new Date(timestampUtc);
+  const dow = (d.getUTCDay() + 6) % 7; // Monday=0 … Sunday=6
+  const hh = String(d.getUTCHours()).padStart(2, '0');
+  const mm = String(d.getUTCMinutes()).padStart(2, '0');
+  return `${['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][dow]} ${hh}:${mm}`;
+}
+
+// ---- Minute readout ----------------------------------------------------------
+
+export type Y1Metric = 'frontendIops' | 'frontendBandwidth' | 'backendOps';
+
+export type MinuteReadout =
+  | { kind: 'missing' }
+  | { kind: 'unknown'; reason: string }
+  | {
+      kind: 'value';
+      existing: number;
+      proposed: number;
+      combined: number;
+      /** null when the resource declares no budget */
+      overBudget: boolean | null;
+      /** additional named components of combined (e.g. declared background) */
+      background?: number;
+      unitLabel: string;
+    };
+
+function assertSums(parts: number[], combined: number, what: string): void {
+  const sum = parts.reduce((a, b) => a + b, 0);
+  const tol = Math.max(1e-6, Math.abs(combined) * 1e-6);
+  if (Math.abs(sum - combined) > tol) {
+    throw new Error(
+      `minuteReadout invariant violated for ${what}: parts ${sum} ≠ combined ${combined}`,
+    );
+  }
+}
+
+/**
+ * Breakdown of one minute's displayed demand for the selected Y1 metric, with
+ * the demand multiplier applied to proposed demand exactly once. The dev
+ * invariant throws if the parts don't sum to the derived combined value, so a
+ * mismatch can never silently render. Unknown/missing is never 'within budget'.
+ */
+export function minuteReadout(
+  record: TraceRecord,
+  derived: DerivedMinute,
+  metric: Y1Metric,
+  multiplier: number,
+  unit: RateUnit | null,
+  budget: number | null,
+): MinuteReadout {
+  if (record.missing || record.existing === null || record.proposed === null) {
+    return { kind: 'missing' };
+  }
+  if (metric === 'backendOps') {
+    if (derived.backend === null || derived.backend.kind === 'unknown') {
+      return {
+        kind: 'unknown',
+        reason: derived.backend?.kind === 'unknown' ? derived.backend.reason : 'no backend estimate',
+      };
+    }
+    const b = derived.backend;
+    assertSums([b.existing.total, b.background, b.proposed.total], b.combinedTotal, 'backendOps');
+    return {
+      kind: 'value',
+      existing: b.existing.total,
+      proposed: b.proposed.total, // already multiplier-scaled by deriveTraceMinutes
+      combined: b.combinedTotal,
+      background: b.background,
+      overBudget: budget === null ? null : b.combinedTotal > budget,
+      unitLabel: 'ops/s',
+    };
+  }
+  if (metric === 'frontendIops') {
+    const existing = record.existing.readIops + record.existing.writeIops;
+    const proposed = (record.proposed.readIops + record.proposed.writeIops) * multiplier;
+    const combined = derived.frontendIops as number;
+    assertSums([existing, proposed], combined, 'frontendIops');
+    return {
+      kind: 'value',
+      existing,
+      proposed,
+      combined,
+      overBudget: budget === null ? null : combined > budget,
+      unitLabel: 'IOPS',
+    };
+  }
+  const existing =
+    record.existing.readIops * record.existing.readBlockBytes +
+    record.existing.writeIops * record.existing.writeBlockBytes;
+  const proposed =
+    (record.proposed.readIops * record.proposed.readBlockBytes +
+      record.proposed.writeIops * record.proposed.writeBlockBytes) *
+    multiplier;
+  const combined = derived.throughputBytesPerSecond as number;
+  assertSums([existing, proposed], combined, 'frontendBandwidth');
+  return {
+    kind: 'value',
+    existing,
+    proposed,
+    combined,
+    overBudget: budget === null ? null : combined > budget,
+    unitLabel: unit?.unit ?? 'bytes/s',
+  };
+}
+
 // ---- Units / formatting ------------------------------------------------------
 
 export type RateUnit = { unit: 'MB/s' | 'GB/s'; divisor: number };
@@ -208,6 +336,69 @@ export function formatRate(bytesPerSecond: number | null, unit: RateUnit, precis
 
 export const formatCount = (v: number | null): string =>
   v === null ? 'unknown' : Math.round(v).toLocaleString('en-US');
+
+/** Display a headroom value by its canonical unit: bytes → TiB (2 dp),
+ *  bytes/second → MiB/s (0–1 dp), counts with locale separators. */
+export function formatHeadroom(value: number, unit: string): string {
+  if (unit === 'bytes')
+    return `${(value / TIB).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} TiB`;
+  if (unit === 'bytes/second')
+    return `${(value / 2 ** 20).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 1 })} MiB/s`;
+  return `${Math.round(value).toLocaleString('en-US')} ${unit}`;
+}
+
+// ---- Dimension-card view models ----------------------------------------------
+
+export interface LatencyCard {
+  baselineP95Ms: number | null;
+  baselineMaxMs: number | null;
+  targetMs: number | null;
+}
+
+export interface ProtectionCapabilityRow {
+  name: string;
+  required: string;
+  declared: string;
+}
+
+const evidenceValue = (check: CheckResult, label: string): Evidence | undefined =>
+  check.findings.flatMap((f) => f.evidence).find((e) => e.label === label);
+
+/** Baseline latency numbers for the latency card: P95/max from the weekly
+ *  summary, target from the check's finding evidence. No budget vocabulary. */
+export function latencyCard(check: CheckResult, weekly: TraceAssessment['weekly']): LatencyCard {
+  const target = evidenceValue(check, 'workload latency target');
+  return {
+    baselineP95Ms: weekly.latencyMs.p95,
+    baselineMaxMs: weekly.latencyMs.max,
+    targetMs: typeof target?.value === 'number' ? target.value : null,
+  };
+}
+
+/** Required vs declared protection capabilities for the protection card. */
+export function protectionCard(check: CheckResult): ProtectionCapabilityRow[] {
+  const ev = (label: string) => evidenceValue(check, label);
+  const show = (v: Evidence | undefined): string =>
+    v === undefined ? 'not declared' : v.value === null ? (v.missingReason ?? 'unknown') : String(v.value);
+  return [
+    {
+      name: 'tolerated drive failures',
+      required: show(ev('minimum tolerated drive failures required')),
+      declared: show(ev('tolerated drive failures')),
+    },
+    { name: 'snapshots', required: show(ev('snapshots required')), declared: show(ev('snapshots capability')) },
+    {
+      name: 'encryption at rest',
+      required: show(ev('encryptionAtRest required')),
+      declared: show(ev('encryptionAtRest capability')),
+    },
+    {
+      name: 'replication',
+      required: show(ev('replication required')),
+      declared: show(ev('replication capability')),
+    },
+  ];
+}
 
 export const formatTiB = (bytes: number | null, digits = 2): string =>
   bytes === null ? 'unknown' : `${(bytes / TIB).toFixed(digits)} TiB`;

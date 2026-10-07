@@ -43,7 +43,7 @@ export function checkFrontendIops(
         'Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.',
       confidence: 'high' as const,
       confidenceRationale:
-        'Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.',
+        'Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.',
       assumptions: ['Existing and proposed demand are aligned to the same modeled interval.'],
     },
   ];

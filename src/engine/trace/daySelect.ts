@@ -15,8 +15,10 @@ interface ResourceSeries {
 }
 
 function ts(trace: Trace, index: number): string {
-  return trace.records[index].timestampUtc;
+  return trace.records[index].timestampUtc.replace(/\.000Z$/, 'Z');
 }
+
+const num = (v: number | null): string => String(Math.round((v ?? 0) * 100) / 100);
 
 /**
  * R-DAY-1 default detail day. The earliest day containing the start of the
@@ -77,7 +79,7 @@ export function selectDefaultDay(
     return {
       dayIndex,
       reason:
-        `longest exceedance run: ${bestRun.resource} ${value} vs budget ${budget} ` +
+        `longest exceedance run: ${bestRun.resource} ${num(value)} vs budget ${num(budget)} ` +
         `at ${ts(trace, bestRun.startIndex)} (run length ${bestRun.length} min)`,
     };
   }
@@ -103,7 +105,7 @@ export function selectDefaultDay(
     dayIndex: Math.floor(b.index / MINUTES_PER_DAY),
     reason:
       `no budget exceedance; highest utilization ratio minute: ${b.resource} ` +
-      `${res.values[b.index]} vs budget ${res.budget} (${(b.ratio * 100).toFixed(1)}% of budget) ` +
+      `${num(res.values[b.index])} vs budget ${num(res.budget)} (${(b.ratio * 100).toFixed(1)}% of budget) ` +
       `at ${ts(trace, b.index)}`,
   };
 }

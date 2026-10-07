@@ -1,6 +1,6 @@
 # M1 golden per-sample assessments
 
-Generated: 2026-10-07T13:18:51.230Z
+Generated: 2026-10-07T15:50:39.089Z
 Ruleset: 1.0.0-m1   Commit: uncommitted (M1 pre-review)
 Label: Synthetic data. Educational demonstration; not vendor sizing or production configuration guidance.
 
@@ -29,7 +29,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -45,7 +45,7 @@ Dimension iops: modeled-ready
       calculation: 20000 existing + 4000 proposed = 24000 IOPS vs 120000 budget; headroom 96000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -88,18 +88,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -173,7 +173,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -189,7 +189,7 @@ Dimension iops: modeled-ready
       calculation: 50000 existing + 15000 proposed = 65000 IOPS vs 120000 budget; headroom 55000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -232,18 +232,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -317,7 +317,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -333,7 +333,7 @@ Dimension iops: modeled-ready
       calculation: 75000 existing + 15000 proposed = 90000 IOPS vs 120000 budget; headroom 30000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -376,18 +376,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -461,7 +461,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -477,7 +477,7 @@ Dimension iops: modeled-ready
       calculation: 25000 existing + 12000 proposed = 37000 IOPS vs 120000 budget; headroom 83000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -520,18 +520,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -605,7 +605,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -621,7 +621,7 @@ Dimension iops: modeled-ready
       calculation: 40000 existing + 4000 proposed = 44000 IOPS vs 120000 budget; headroom 76000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -664,18 +664,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -751,7 +751,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -767,7 +767,7 @@ Dimension iops: modeled-ready
       calculation: 75000 existing + 22500 proposed = 97500 IOPS vs 120000 budget; headroom 22500 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -810,18 +810,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -895,7 +895,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -911,7 +911,7 @@ Dimension iops: modeled-ready
       calculation: 75000 existing + 22500 proposed = 97500 IOPS vs 120000 budget; headroom 22500 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -954,18 +954,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -1039,7 +1039,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -1055,7 +1055,7 @@ Dimension iops: modeled-ready
       calculation: 75000 existing + 22500 proposed = 97500 IOPS vs 120000 budget; headroom 22500 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -1098,18 +1098,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -1183,7 +1183,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -1199,7 +1199,7 @@ Dimension iops: modeled-ready
       calculation: 75000 existing + 30000 proposed = 105000 IOPS vs 120000 budget; headroom 15000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -1242,18 +1242,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -1327,7 +1327,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -1343,7 +1343,7 @@ Dimension iops: modeled-ready
       calculation: 75000 existing + 30000 proposed = 105000 IOPS vs 120000 budget; headroom 15000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -1386,18 +1386,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -1471,7 +1471,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -1487,7 +1487,7 @@ Dimension iops: modeled-ready
       calculation: 75000 existing + 30000 proposed = 105000 IOPS vs 120000 budget; headroom 15000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -1530,18 +1530,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -1618,7 +1618,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -1634,7 +1634,7 @@ Dimension iops: modeled-ready
       calculation: 20000 existing + 4000 proposed = 24000 IOPS vs 120000 budget; headroom 96000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -1677,18 +1677,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -1762,7 +1762,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -1778,7 +1778,7 @@ Dimension iops: modeled-ready
       calculation: 50000 existing + 15000 proposed = 65000 IOPS vs 120000 budget; headroom 55000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -1821,18 +1821,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -1906,7 +1906,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -1922,7 +1922,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 15000 proposed = 90000 IOPS vs 120000 budget; headroom 30000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -1965,18 +1965,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -2050,7 +2050,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -2066,7 +2066,7 @@ Dimension iops: modeled-ready
       calculation: 25000 existing + 12000 proposed = 37000 IOPS vs 120000 budget; headroom 83000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -2109,18 +2109,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -2194,7 +2194,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -2210,7 +2210,7 @@ Dimension iops: modeled-ready
       calculation: 40000 existing + 4000 proposed = 44000 IOPS vs 120000 budget; headroom 76000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -2253,18 +2253,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -2340,7 +2340,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -2356,7 +2356,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 22500 proposed = 97500 IOPS vs 120000 budget; headroom 22500 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -2399,18 +2399,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -2484,7 +2484,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -2500,7 +2500,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 22500 proposed = 97500 IOPS vs 120000 budget; headroom 22500 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -2543,18 +2543,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -2628,7 +2628,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -2644,7 +2644,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 22500 proposed = 97500 IOPS vs 120000 budget; headroom 22500 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -2687,18 +2687,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -2772,7 +2772,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -2788,7 +2788,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 30000 proposed = 105000 IOPS vs 120000 budget; headroom 15000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -2831,18 +2831,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -2916,7 +2916,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -2932,7 +2932,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 30000 proposed = 105000 IOPS vs 120000 budget; headroom 15000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -2975,18 +2975,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -3060,7 +3060,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -3076,7 +3076,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 30000 proposed = 105000 IOPS vs 120000 budget; headroom 15000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -3119,18 +3119,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -3207,7 +3207,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -3223,7 +3223,7 @@ Dimension iops: modeled-ready
       calculation: 50000 existing + 30000 proposed = 80000 IOPS vs 120000 budget; headroom 40000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -3266,18 +3266,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -3351,7 +3351,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -3367,7 +3367,7 @@ Dimension iops: modeled-ready
       calculation: 75000 existing + 30000 proposed = 105000 IOPS vs 120000 budget; headroom 15000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -3410,18 +3410,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -3495,7 +3495,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: needs-investigation
@@ -3511,7 +3511,7 @@ Dimension iops: needs-investigation
       calculation: 20000 existing + 20000 proposed = 40000 IOPS vs 120000 budget; headroom 80000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: needs-investigation
@@ -3551,18 +3551,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -3636,7 +3636,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -3652,7 +3652,7 @@ Dimension iops: modeled-ready
       calculation: 40000 existing + 8000 proposed = 48000 IOPS vs 120000 budget; headroom 72000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -3695,18 +3695,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -3782,7 +3782,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -3798,7 +3798,7 @@ Dimension iops: modeled-ready
       calculation: 75000 existing + 45000 proposed = 120000 IOPS vs 120000 budget; headroom 0 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -3841,18 +3841,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -3926,7 +3926,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -3942,7 +3942,7 @@ Dimension iops: modeled-ready
       calculation: 75000 existing + 45000 proposed = 120000 IOPS vs 120000 budget; headroom 0 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -3985,18 +3985,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -4070,7 +4070,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -4086,7 +4086,7 @@ Dimension iops: modeled-ready
       calculation: 75000 existing + 45000 proposed = 120000 IOPS vs 120000 budget; headroom 0 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -4129,18 +4129,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -4214,7 +4214,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -4230,7 +4230,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 60000 proposed = 135000 IOPS vs 120000 budget; headroom -15000 IOPS.
       implication: Front-end logical IOPS demand exceeds the operating budget; the array front end is a candidate bottleneck.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -4273,18 +4273,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -4358,7 +4358,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -4374,7 +4374,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 60000 proposed = 135000 IOPS vs 120000 budget; headroom -15000 IOPS.
       implication: Front-end logical IOPS demand exceeds the operating budget; the array front end is a candidate bottleneck.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -4417,18 +4417,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -4502,7 +4502,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -4518,7 +4518,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 60000 proposed = 135000 IOPS vs 120000 budget; headroom -15000 IOPS.
       implication: Front-end logical IOPS demand exceeds the operating budget; the array front end is a candidate bottleneck.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -4561,18 +4561,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -4649,7 +4649,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -4665,7 +4665,7 @@ Dimension iops: modeled-ready
       calculation: 50000 existing + 30000 proposed = 80000 IOPS vs 120000 budget; headroom 40000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -4708,18 +4708,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -4793,7 +4793,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -4809,7 +4809,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 30000 proposed = 105000 IOPS vs 120000 budget; headroom 15000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -4852,18 +4852,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -4937,7 +4937,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: needs-investigation
@@ -4953,7 +4953,7 @@ Dimension iops: needs-investigation
       calculation: 20000 existing + 20000 proposed = 40000 IOPS vs 120000 budget; headroom 80000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: needs-investigation
@@ -4993,18 +4993,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -5078,7 +5078,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -5094,7 +5094,7 @@ Dimension iops: modeled-ready
       calculation: 40000 existing + 8000 proposed = 48000 IOPS vs 120000 budget; headroom 72000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -5137,18 +5137,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -5224,7 +5224,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -5240,7 +5240,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 45000 proposed = 120000 IOPS vs 120000 budget; headroom 0 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -5283,18 +5283,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -5368,7 +5368,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -5384,7 +5384,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 45000 proposed = 120000 IOPS vs 120000 budget; headroom 0 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -5427,18 +5427,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -5512,7 +5512,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -5528,7 +5528,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 45000 proposed = 120000 IOPS vs 120000 budget; headroom 0 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -5571,18 +5571,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -5656,7 +5656,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -5672,7 +5672,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 60000 proposed = 135000 IOPS vs 120000 budget; headroom -15000 IOPS.
       implication: Front-end logical IOPS demand exceeds the operating budget; the array front end is a candidate bottleneck.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -5715,18 +5715,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -5800,7 +5800,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -5816,7 +5816,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 60000 proposed = 135000 IOPS vs 120000 budget; headroom -15000 IOPS.
       implication: Front-end logical IOPS demand exceeds the operating budget; the array front end is a candidate bottleneck.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -5859,18 +5859,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -5944,7 +5944,7 @@ Dimension capacity: modeled-ready
       calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -5960,7 +5960,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 60000 proposed = 135000 IOPS vs 120000 budget; headroom -15000 IOPS.
       implication: Front-end logical IOPS demand exceeds the operating budget; the array front end is a candidate bottleneck.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -6003,18 +6003,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)

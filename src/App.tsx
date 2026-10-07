@@ -26,12 +26,19 @@ function App() {
     workloadId: 'WL-VM',
     options: { demandMultiplier: 1, horizonYears: 1 },
   });
+  // null → the engine's selected default day
+  const [dayIndex, setDayIndex] = useState<number | null>(null);
 
   const { scenario, selected, deltas } = useMemo(() => {
     const s = loadScenario(selection.infraId, selection.workloadId);
-    const b = baselineAndWhatIf(s, selection.options);
+    const b = baselineAndWhatIf(s, selection.options, dayIndex ?? undefined);
     return { scenario: s, ...b };
-  }, [selection]);
+  }, [selection, dayIndex]);
+
+  const onSelectionChange = (s: Selection) => {
+    setDayIndex(null); // reset to engine default when scenario/options change
+    setSelection(s);
+  };
 
   const a = selected.assessment;
 
@@ -43,10 +50,10 @@ function App() {
           selection={selection}
           infrastructures={INFRAS}
           workloads={WORKLOADS}
-          onChange={setSelection}
+          onChange={onSelectionChange}
         />
         <DecisionBanner assessment={a} />
-        <DimensionCards dimensions={a.dimensions} />
+        <DimensionCards dimensions={a.dimensions} weekly={a.weekly} />
         <EnvironmentDetails infra={scenario.infra} />
         <div className="columns">
           <div>
@@ -59,6 +66,9 @@ function App() {
               assessment={a}
               day={selected.day}
               derivedDay={selected.derivedDay}
+              dayIndex={selected.dayIndex}
+              onDayChange={setDayIndex}
+              multiplier={selection.options.demandMultiplier}
               budgets={selected.budgets}
               ceilings={selected.ceilings}
             />

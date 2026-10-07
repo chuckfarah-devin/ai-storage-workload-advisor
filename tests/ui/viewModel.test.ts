@@ -3,13 +3,19 @@ import {
   BASELINE_SCHEDULE,
   assess,
   baselineAndWhatIf,
+  bucketLabel,
   chooseRateUnit,
   exportAssessment,
   exportText,
+  formatHeadroom,
   formatRate,
+  latencyCard,
+  protectionCard,
   loadScenario,
+  minuteReadout,
   presetWindows,
 } from '../../src/ui/viewModel.js';
+import { deriveTraceMinutes } from '../../src/engine/index.js';
 
 // R-UI-1: view-model computation — unit selection, presets, exports, what-if.
 describe('chooseRateUnit / formatRate', () => {
@@ -42,6 +48,80 @@ describe('presetWindows', () => {
     const p = Object.fromEntries(presetWindows(BASELINE_SCHEDULE, 5).map((w) => [w.id, w]));
     expect(p['morning-burst'].available).toBe(false);
     expect(p['morning-burst'].explanation).toContain('Saturday');
+  });
+});
+
+describe('bucketLabel', () => {
+  it('derives day and HH:MM from the timestamp, not the index', () => {
+    expect(bucketLabel('2026-10-05T10:00:00Z')).toBe('Mon 10:00');
+    expect(bucketLabel('2026-10-11T23:50:00Z')).toBe('Sun 23:50');
+    const b = assess(loadScenario('INF-B', 'WL-VM'), { demandMultiplier: 1, horizonYears: 1 }).buckets;
+    expect(bucketLabel(b[60].timestampUtc)).toBe('Mon 10:00');
+    expect(bucketLabel(b[1007].timestampUtc)).toBe('Sun 23:50');
+    expect(b[60].startIndex).toBe(600);
+    expect(b[1007].startIndex).toBe(10070);
+  });
+});
+
+describe('minuteReadout', () => {
+  const scenario = loadScenario('INF-B', 'WL-VM');
+  const day0 = assess(scenario, { demandMultiplier: 1, horizonYears: 1 });
+  const derived1 = deriveTraceMinutes(scenario.infra, scenario.trace, 1);
+  const derived2 = deriveTraceMinutes(scenario.infra, scenario.trace, 2);
+  const budgets = day0.budgets;
+
+  it('1× FE IOPS at Monday 10:05: 75,000 existing / 15,000 proposed / 90,000 combined', () => {
+    const r = minuteReadout(scenario.trace.records[605], derived1[605], 'frontendIops', 1, null, budgets.frontendIops);
+    expect(r).toMatchObject({ kind: 'value', existing: 75000, proposed: 15000, combined: 90000, overBudget: false, unitLabel: 'IOPS' });
+  });
+
+  it('2× FE IOPS: 75,000 / 30,000 / 105,000', () => {
+    const r = minuteReadout(scenario.trace.records[605], derived2[605], 'frontendIops', 2, null, budgets.frontendIops);
+    expect(r).toMatchObject({ kind: 'value', existing: 75000, proposed: 30000, combined: 105000 });
+  });
+
+  it('2× backend: 171,750 existing / 68,700 proposed / 240,450 combined ops/s', () => {
+    const r = minuteReadout(scenario.trace.records[605], derived2[605], 'backendOps', 2, null, budgets.backendOps);
+    expect(r.kind).toBe('value');
+    if (r.kind === 'value') {
+      expect(r.existing).toBeCloseTo(171750, 4);
+      expect(r.proposed).toBeCloseTo(68700, 4);
+      expect(r.combined).toBeCloseTo(240450, 4);
+      expect(r.overBudget).toBe(true);
+      expect(r.unitLabel).toBe('ops/s');
+    }
+  });
+
+  it('bandwidth minute uses the chart unit, parts sum to combined', () => {
+    const unit = chooseRateUnit([2_516_582_400]);
+    const r = minuteReadout(scenario.trace.records[605], derived1[605], 'frontendBandwidth', 1, unit, budgets.throughputBytesPerSecond);
+    expect(r.kind).toBe('value');
+    if (r.kind === 'value') {
+      expect(r.combined).toBeCloseTo(derived1[605].throughputBytesPerSecond!, 6);
+      expect(r.existing + r.proposed).toBeCloseTo(r.combined, 6);
+      expect(r.unitLabel).toBe('GB/s');
+      expect(formatRate(r.combined, unit)).toContain('GB/s');
+    }
+  });
+
+  it('RAG ingestion minute is unknown (never "within budget")', () => {
+    const rag = loadScenario('INF-A', 'WL-RAG');
+    const derived = deriveTraceMinutes(rag.infra, rag.trace, 1);
+    const r = minuteReadout(rag.trace.records[120], derived[120], 'backendOps', 1, null, 200000);
+    expect(r.kind).toBe('unknown');
+    if (r.kind === 'unknown') expect(r.reason).toContain('65536');
+  });
+});
+
+describe('assess day selection', () => {
+  it('an explicit dayIndex re-extracts the detail day', () => {
+    const b = assess(loadScenario('INF-A', 'WL-VM'), { demandMultiplier: 1, horizonYears: 1 }, 5);
+    expect(b.dayIndex).toBe(5);
+    expect(b.day[0].index).toBe(5 * 1440);
+    expect(b.derivedDay).toHaveLength(1440);
+    // presets recompute: Saturday has no morning burst
+    const p = presetWindows(BASELINE_SCHEDULE, b.dayIndex);
+    expect(p.find((w) => w.id === 'morning-burst')!.available).toBe(false);
   });
 });
 
@@ -79,6 +159,37 @@ describe('assess + exports (all four combinations)', () => {
     const b = assess(loadScenario('INF-A', 'WL-RAG'), { demandMultiplier: 1, horizonYears: 1 });
     expect(b.assessment.weekly.backendOps.unknownMinutes).toBe(900);
     expect(b.assessment.weekly.backendOps.summary.count).toBe(9180);
+  });
+});
+
+describe('formatHeadroom', () => {
+  it('renders binary units with locale separators', () => {
+    expect(formatHeadroom(27_793_649_922_512, 'bytes')).toBe('25.28 TiB');
+    expect(formatHeadroom(-49_850_155_188_707, 'bytes')).toBe('-45.34 TiB');
+    expect(formatHeadroom(1_263_206_400, 'bytes/second')).toBe('1,204.7 MiB/s');
+    expect(formatHeadroom(30_000, 'IOPS')).toBe('30,000 IOPS');
+    expect(formatHeadroom(-6_100, 'ops/s')).toBe('-6,100 ops/s');
+  });
+});
+
+describe('latencyCard / protectionCard', () => {
+  const b = assess(loadScenario('INF-B', 'WL-VM'), { demandMultiplier: 1, horizonYears: 1 });
+  const checks = b.assessment.dimensions.flatMap((d) => d.checks);
+
+  it('latency card shows baseline P95/max and the workload target — no budget vocabulary', () => {
+    const card = latencyCard(checks.find((c) => c.id === 'latency')!, b.assessment.weekly);
+    expect(card.baselineP95Ms).toBeCloseTo(1.2, 6);
+    expect(card.baselineMaxMs).toBeCloseTo(1.4, 6);
+    expect(card.targetMs).toBe(2);
+  });
+
+  it('protection card lists required vs declared capabilities', () => {
+    const rows = protectionCard(checks.find((c) => c.id === 'protection')!);
+    expect(rows).toHaveLength(4);
+    const drive = rows.find((r) => r.name === 'tolerated drive failures')!;
+    expect(drive).toMatchObject({ required: '1', declared: '2' }); // INF-B RAID 6 tolerates 2
+    expect(rows.find((r) => r.name === 'snapshots')!.declared).toBe('true');
+    expect(rows.find((r) => r.name === 'replication')!.declared).toBe('unknown');
   });
 });
 

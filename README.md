@@ -18,12 +18,13 @@ V1 has **no live arrays, no vendor integration, and no runtime AI**. All data is
 | Tests | [docs/tests.md](docs/tests.md) |
 | Verification | [docs/verification.md](docs/verification.md) |
 | Findings | [docs/findings.md](docs/findings.md) |
+| Walkthrough | [docs/walkthrough.md](docs/walkthrough.md) |
 
 Supporting: [DECISIONS.md](DECISIONS.md) (decision record), [docs/synthetic-profile-proposal.md](docs/synthetic-profile-proposal.md) (profile rationale), [docs/devin-initial-review.md](docs/devin-initial-review.md) (first-review report, requirement IDs), [AGENTS.md](AGENTS.md) (working rules).
 
 ## Status
 
-**Milestones M0–M3 complete; M4 (browser verification) not started.** M1 implements scalar assessment rules over single aligned demand samples; M2 adds the deterministic 10,080-minute weekly trace, aggregation, weekly statistics, default-day selection, and trace assessment (ruleset 1.0.0-m2); M3 adds the React interface (view-model layer, charts, findings, exports) reading engine output only. Playwright/browser verification is not yet implemented.
+**M0–M4 complete pending Chuck's review.** M1 implements scalar assessment rules over single aligned demand samples; M2 adds the deterministic 10,080-minute weekly trace, aggregation, weekly statistics, default-day selection, and trace assessment (ruleset 1.0.0-m2); M3 adds the React interface (view-model layer, charts, findings, exports) reading engine output only; M4 adds Playwright browser verification on desktop and mobile with screenshots under [docs/verification/m4/](docs/verification/m4/screenshots/). See [docs/findings.md](docs/findings.md) for the business answer and [docs/walkthrough.md](docs/walkthrough.md) for a five-minute demo script.
 
 ## How to run
 
@@ -40,6 +41,7 @@ npm test            # Vitest suite (tests/engine + tests/ui)
 npm run golden      # regenerate tests/golden/*.json, tests/golden/m2/, docs/verification outputs
 npm run typecheck   # tsc --noEmit over src, tests, scripts
 npm run lint        # oxlint
+npm run e2e         # Playwright browser checks (desktop + mobile); reuses a dev server on :5173
 ```
 
 ## Layout

@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react';
 import type { Bucket, TraceAssessment } from '../../engine/index.js';
-import { formatCount, formatRate, chooseRateUnit } from '../viewModel.js';
+import { bucketLabel, formatCount, formatRate, chooseRateUnit } from '../viewModel.js';
+import { useChartWidth } from '../useChartWidth.js';
 
 type Metric = 'backendOps' | 'frontendIops' | 'throughputBytesPerSecond';
 
-const W = 960;
 const H = 250;
 const LEFT = 60;
-const RIGHT = 950;
+const RIGHT_PAD = 10;
 const TOP = 30;
 const BOTTOM = 200;
 
@@ -17,17 +17,13 @@ interface Props {
   budgets: { frontendIops: number; backendOps: number | null; throughputBytesPerSecond: number };
 }
 
-function dayLabel(startIndex: number): string {
-  const day = Math.floor(startIndex / 144);
-  const minute = (startIndex % 144) * 10;
-  const hh = String(Math.floor(minute / 60)).padStart(2, '0');
-  const mm = String(minute % 60).padStart(2, '0');
-  return `${['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][day]} ${hh}:${mm}`;
-}
+
 
 export function WeeklyChart({ buckets, assessment, budgets }: Props) {
   const [metric, setMetric] = useState<Metric>('backendOps');
   const [inspect, setInspect] = useState(0);
+  const { ref: chartRef, width: W } = useChartWidth();
+  const RIGHT = W - RIGHT_PAD;
 
   const series = (b: Bucket) =>
     metric === 'backendOps'
@@ -115,6 +111,7 @@ export function WeeklyChart({ buckets, assessment, budgets }: Props) {
           <option value="throughputBytesPerSecond">throughput</option>
         </select>
       </div>
+      <div ref={chartRef}>
       <svg
         role="img"
         aria-label={`Weekly ${metricName} by ten-minute bucket. Operating budget ${fmt(budget)}.`}
@@ -156,6 +153,7 @@ export function WeeklyChart({ buckets, assessment, budgets }: Props) {
         ))}
         <text x={(LEFT + RIGHT) / 2} y={243} textAnchor="middle">Time (UTC)</text>
       </svg>
+      </div>
       <div className="legend">
         <span>bucket mean</span>
         <span>minute max</span>
@@ -172,9 +170,13 @@ export function WeeklyChart({ buckets, assessment, budgets }: Props) {
         onChange={(e) => setInspect(Number(e.target.value))}
       />
       <div className="readout" role="status">
-        {dayLabel(selected.startIndex)} UTC · 10 min · mean {fmt(sel.mean)} / max {fmt(sel.max)} ·{' '}
-        {sel.above} minutes above budget
-        {metric === 'backendOps' && selected.unknownMinutes > 0 ? ` · ${selected.unknownMinutes} unknown` : ''}
+        {bucketLabel(selected.timestampUtc)} UTC · 10 min ·{' '}
+        {sel.mean === null && sel.max === null
+          ? `unknown (${selected.unknownMinutes} unknown minutes — not plotted as zero)`
+          : `mean ${fmt(sel.mean)} / max ${fmt(sel.max)} ${metric === 'backendOps' ? 'ops/s' : metric === 'frontendIops' ? 'IOPS' : unit!.unit} · ${sel.above} minutes above budget`}
+        {metric === 'backendOps' && selected.unknownMinutes > 0 && sel.mean !== null
+          ? ` · ${selected.unknownMinutes} unknown`
+          : ''}
       </div>
       <div className="stats">
         <span><b>{fmt(wk.summary.mean)}</b>mean</span>

@@ -48,7 +48,7 @@ export function checkCapacity(
           : 'Investigate capacity expansion, reclamation, or a smaller workload footprint.',
       confidence: 'high' as const,
       confidenceRationale:
-        'Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.',
+        'Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.',
       assumptions: ['Usable capacity excludes spares and metadata reserves.'],
     },
   ];

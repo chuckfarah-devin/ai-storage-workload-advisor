@@ -1,6 +1,6 @@
 # M2 weekly trace summaries
 
-Generated: 2026-10-07T13:18:51.247Z
+Generated: 2026-10-07T15:50:39.108Z
 Ruleset: 1.0.0-m2   Label: Synthetic data. Educational demonstration; not vendor sizing or production configuration guidance.
 
 Each section summarizes `assessTrace` (multiplier 1, horizon 1) over the deterministic
@@ -18,7 +18,7 @@ Coverage: 10080/10080 (100.00%)
 
 Latency (derived): P90 0.90 ms, P95 1.20 ms, max 1.40 ms.
 Max used capacity: 120.3218 TiB.
-Default detail day: day 0 — no budget exceedance; highest utilization ratio minute: backend operations 152100 vs budget 200000 (76.0% of budget) at 2026-10-05T10:05:00.000Z
+Default detail day: day 0 — no budget exceedance; highest utilization ratio minute: backend operations 152100 vs budget 200000 (76.0% of budget) at 2026-10-05T10:05:00Z
 Overall: needs-investigation; dimensions: capacity=modeled-ready, iops=modeled-ready, throughput=modeled-ready, latency=needs-investigation, protection=modeled-ready, growth=modeled-ready.
 
 Hidden-burst check — Monday 10-minute buckets (mean never exceeds the backend budget
@@ -45,7 +45,7 @@ Weekly (10,080-minute trace; coverage 10080/10080 = 100.0%):
   throughput: mean 548.04 MiB/s  P90 863.28 MiB/s  P95 863.28 MiB/s  max 1195.31 MiB/s  |  budget 2400 MiB/s  |  exceedance 0 min (0.00% of valid), longest run 0 min, 0 runs
   latency: P90 0.9 ms  P95 1.2 ms  max 1.4 ms
   max used capacity: 120.32 TiB
-Default detail day: day 0 (Monday) — no budget exceedance; highest utilization ratio minute: backend operations 152100 vs budget 200000 (76.0% of budget) at 2026-10-05T10:05:00.000Z
+Default detail day: day 0 (Monday) — no budget exceedance; highest utilization ratio minute: backend operations 152100 vs budget 200000 (76.0% of budget) at 2026-10-05T10:05:00Z
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
     driving minute: 10079
@@ -61,7 +61,7 @@ Dimension capacity: modeled-ready
       calculation: 120.32 TiB used + 24 TiB proposed = 144.32 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 67.68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-ready
@@ -86,7 +86,7 @@ Dimension iops: modeled-ready
       calculation: 75000 existing + 15000 proposed = 90000 IOPS vs 120000 budget; headroom 30000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-ready
@@ -148,18 +148,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -228,7 +228,7 @@ Coverage: 10080/10080 (100.00%)
 
 Latency (derived): P90 0.90 ms, P95 1.20 ms, max 1.40 ms.
 Max used capacity: 120.3218 TiB.
-Default detail day: day 0 — longest exceedance run: backend operations 206100.00000000003 vs budget 200000 at 2026-10-05T10:05:00.000Z (run length 10 min)
+Default detail day: day 0 — longest exceedance run: backend operations 206100 vs budget 200000 at 2026-10-05T10:05:00Z (run length 10 min)
 Overall: modeled-constraint; dimensions: capacity=modeled-ready, iops=modeled-constraint, throughput=modeled-ready, latency=needs-investigation, protection=modeled-ready, growth=modeled-ready.
 
 Hidden-burst check — Monday 10-minute buckets (mean never exceeds the backend budget
@@ -273,7 +273,7 @@ Weekly (10,080-minute trace; coverage 10080/10080 = 100.0%):
   throughput: mean 548.04 MiB/s  P90 863.28 MiB/s  P95 863.28 MiB/s  max 1195.31 MiB/s  |  budget 2400 MiB/s  |  exceedance 0 min (0.00% of valid), longest run 0 min, 0 runs
   latency: P90 0.9 ms  P95 1.2 ms  max 1.4 ms
   max used capacity: 120.32 TiB
-Default detail day: day 0 (Monday) — longest exceedance run: backend operations 206100.00000000003 vs budget 200000 at 2026-10-05T10:05:00.000Z (run length 10 min)
+Default detail day: day 0 (Monday) — longest exceedance run: backend operations 206100 vs budget 200000 at 2026-10-05T10:05:00Z (run length 10 min)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
     driving minute: 10079
@@ -289,7 +289,7 @@ Dimension capacity: modeled-ready
       calculation: 120.32 TiB used + 24 TiB proposed = 144.32 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.28 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -314,7 +314,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 15000 proposed = 90000 IOPS vs 120000 budget; headroom 30000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -376,18 +376,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 2 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 2 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 2 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -478,7 +478,7 @@ Coverage: 10080/10080 (100.00%)
 
 Latency (derived): P90 0.90 ms, P95 1.20 ms, max 1.40 ms.
 Max used capacity: 120.3218 TiB.
-Default detail day: day 0 — no budget exceedance; highest utilization ratio minute: front-end IOPS 105000 vs budget 120000 (87.5% of budget) at 2026-10-05T10:05:00.000Z
+Default detail day: day 0 — no budget exceedance; highest utilization ratio minute: front-end IOPS 105000 vs budget 120000 (87.5% of budget) at 2026-10-05T10:05:00Z
 Overall: needs-investigation; dimensions: capacity=modeled-ready, iops=needs-investigation, throughput=modeled-ready, latency=needs-investigation, protection=modeled-ready, growth=modeled-ready.
 
 Hidden-burst check — Monday 10-minute buckets (mean never exceeds the backend budget
@@ -505,7 +505,7 @@ Weekly (10,080-minute trace; coverage 10080/10080 = 100.0%):
   throughput: mean 671.28 MiB/s  P90 898.44 MiB/s  P95 1515.63 MiB/s  max 1515.63 MiB/s  |  budget 2400 MiB/s  |  exceedance 0 min (0.00% of valid), longest run 0 min, 0 runs
   latency: P90 0.9 ms  P95 1.2 ms  max 1.4 ms
   max used capacity: 120.32 TiB
-Default detail day: day 0 (Monday) — no budget exceedance; highest utilization ratio minute: front-end IOPS 105000 vs budget 120000 (87.5% of budget) at 2026-10-05T10:05:00.000Z
+Default detail day: day 0 (Monday) — no budget exceedance; highest utilization ratio minute: front-end IOPS 105000 vs budget 120000 (87.5% of budget) at 2026-10-05T10:05:00Z
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
     driving minute: 10079
@@ -521,7 +521,7 @@ Dimension capacity: modeled-ready
       calculation: 120.32 TiB used + 30 TiB proposed = 150.32 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 61.68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: needs-investigation
@@ -546,7 +546,7 @@ Dimension iops: needs-investigation
       calculation: 75000 existing + 30000 proposed = 105000 IOPS vs 120000 budget; headroom 15000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: needs-investigation
@@ -605,18 +605,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
@@ -685,7 +685,7 @@ Coverage: 10080/10080 (100.00%)
 
 Latency (derived): P90 0.90 ms, P95 1.20 ms, max 1.40 ms.
 Max used capacity: 120.3218 TiB.
-Default detail day: day 0 — longest exceedance run: backend operations 208650.00000000003 vs budget 200000 at 2026-10-05T10:05:00.000Z (run length 10 min)
+Default detail day: day 0 — longest exceedance run: backend operations 208650 vs budget 200000 at 2026-10-05T10:05:00Z (run length 10 min)
 Overall: modeled-constraint; dimensions: capacity=modeled-ready, iops=modeled-constraint, throughput=modeled-ready, latency=needs-investigation, protection=modeled-ready, growth=modeled-constraint.
 
 Hidden-burst check — Monday 10-minute buckets (mean never exceeds the backend budget
@@ -730,7 +730,7 @@ Weekly (10,080-minute trace; coverage 10080/10080 = 100.0%):
   throughput: mean 671.28 MiB/s  P90 898.44 MiB/s  P95 1515.63 MiB/s  max 1515.63 MiB/s  |  budget 2400 MiB/s  |  exceedance 0 min (0.00% of valid), longest run 0 min, 0 runs
   latency: P90 0.9 ms  P95 1.2 ms  max 1.4 ms
   max used capacity: 120.32 TiB
-Default detail day: day 0 (Monday) — longest exceedance run: backend operations 208650.00000000003 vs budget 200000 at 2026-10-05T10:05:00.000Z (run length 10 min)
+Default detail day: day 0 (Monday) — longest exceedance run: backend operations 208650 vs budget 200000 at 2026-10-05T10:05:00Z (run length 10 min)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
     driving minute: 10079
@@ -746,7 +746,7 @@ Dimension capacity: modeled-ready
       calculation: 120.32 TiB used + 30 TiB proposed = 150.32 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.28 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Usable capacity excludes spares and metadata reserves.
 Dimension iops: modeled-constraint
@@ -771,7 +771,7 @@ Dimension iops: modeled-constraint
       calculation: 75000 existing + 30000 proposed = 105000 IOPS vs 120000 budget; headroom 15000 IOPS.
       implication: Front-end logical IOPS headroom exists for the proposed workload.
       next investigation: Confirm the declared sustainable IOPS envelope and the aligned demand peak on a real source.
-      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
+      confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not measured on a real array.
       assumptions:
         - Existing and proposed demand are aligned to the same modeled interval.
   Check iops.backend: modeled-constraint
@@ -833,18 +833,18 @@ Dimension latency: needs-investigation
   Check latency: needs-investigation
     headroom: n/a
     % of operating budget: n/a   % of limit: n/a
-    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no validated response curve in V1.
+    Finding R-LAT-1: Baseline P95 latency 1.2 ms is at or below the workload target 1.5 ms; post-addition latency unknown: no response curve in V1.
       evidence:
         - baseline P95 latency: 1.2 ms (basis: aligned demand sample (screening indicator))
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)
         - workload latency target: 1.5 ms (basis: synthetic workload profile)
       calculation: baseline P95 1.2 ms vs target 1.5 ms; baseline max 1.4 ms shown alongside.
       implication: No baseline latency concern is indicated, but this says nothing about latency after the proposed workload is added.
-      next investigation: Establish post-addition latency with a validated response model or measurements; V1 cannot.
+      next investigation: Establish post-addition latency with a response model or measurements; V1 cannot.
       confidence: insufficient — Post-addition latency is an unknown in V1 by design.
       assumptions:
         - Baseline P95 is a screening indicator only; the maximum is shown alongside.
-        - Post-addition latency unknown: no validated response curve in V1.
+        - Post-addition latency unknown: no response curve in V1.
     Finding R-LAT-1: Baseline maximum latency is reported alongside P95 as context.
       evidence:
         - baseline maximum latency: 1.4 ms (basis: aligned demand sample)

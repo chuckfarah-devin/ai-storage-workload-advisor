@@ -12,7 +12,7 @@ describe('R-DAY-1 default day selection', () => {
     const sel = selectDefaultDay(t, deriveTraceMinutes(INF_B, t, 1), traceBudgets(INF_B));
     expect(sel.dayIndex).toBe(0);
     expect(sel.reason).toMatch(/backend operations/);
-    expect(sel.reason).toContain('2026-10-05T10:05:00.000Z');
+    expect(sel.reason).toContain('2026-10-05T10:05:00Z');
   });
 
   it('INF-A × WL-VM: no exceedance → highest-utilization minute on Monday', () => {
