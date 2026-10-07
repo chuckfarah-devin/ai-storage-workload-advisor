@@ -8,7 +8,7 @@ import { INF_A, VM_SAMPLES, WL_VM } from '../fixtures/samples.js';
 describe('R-BUD-1 80% operating budget', () => {
   it('budget = 0.8 × limit for all four resources', () => {
     expect(BUDGET_FRACTION).toBe(0.8);
-    expect(budgetOf(INF_A.capacity.usableBytes)).toBe(160 * TIB);
+    expect(budgetOf(INF_A.capacity.usableBytes)).toBe(212 * TIB);
     expect(budgetOf(INF_A.limits.frontendIops)).toBe(120000);
     expect(budgetOf(INF_A.limits.throughputBytesPerSecond)).toBe(2516582400); // 2400 MiB/s
     expect(budgetOf(INF_A.limits.backendOpsPerSecond as number)).toBe(200000);

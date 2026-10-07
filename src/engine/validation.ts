@@ -124,7 +124,58 @@ export function validateInfrastructure(p: InfrastructureProfile): ValidationResu
   ) {
     d.push({ path: 'backend.backendBlockBytes', message: 'backend block must be positive or null' });
   }
+  validateEnvironment(d, p);
   return result(d);
+}
+
+// ENV-5: the descriptive environment block is optional; when present it must
+// be internally coherent and consistent with the backend layout. No
+// environment field participates in any rule.
+function validateEnvironment(d: ValidationDiagnostic[], p: InfrastructureProfile): void {
+  const e = p.environment;
+  if (e === undefined) return;
+  const n = (v: unknown): v is number => isNumber(v);
+  if (n(e.groupCount) && n(e.dataWidth) && n(e.parityWidth) && n(e.spareDrives) && n(e.driveCount)) {
+    if (e.groupCount * (e.dataWidth + e.parityWidth) + e.spareDrives !== e.driveCount) {
+      d.push({
+        path: 'environment.driveCount',
+        message: 'driveCount must equal groupCount × (dataWidth + parityWidth) + spareDrives',
+      });
+    }
+  }
+  if (n(e.driveCount) && n(e.enclosureSlots) && e.driveCount > e.enclosureSlots) {
+    d.push({ path: 'environment.driveCount', message: 'driveCount exceeds enclosureSlots' });
+  }
+  if (n(e.dataWidth) && e.dataWidth !== p.backend.dataWidth) {
+    d.push({ path: 'environment.dataWidth', message: 'does not match backend.dataWidth' });
+  }
+  if (n(e.parityWidth) && e.parityWidth !== p.backend.parityWidth) {
+    d.push({ path: 'environment.parityWidth', message: 'does not match backend.parityWidth' });
+  }
+  if (n(e.rawBytesDecimal) && n(e.driveCount) && n(e.driveNominalBytesDecimal)) {
+    if (e.rawBytesDecimal !== e.driveCount * e.driveNominalBytesDecimal) {
+      d.push({
+        path: 'environment.rawBytesDecimal',
+        message: 'rawBytesDecimal must equal driveCount × driveNominalBytesDecimal',
+      });
+    }
+  }
+  if (n(e.metadataReserveFraction) && (e.metadataReserveFraction < 0 || e.metadataReserveFraction >= 1)) {
+    d.push({ path: 'environment.metadataReserveFraction', message: 'must be in [0, 1)' });
+  }
+  if (
+    n(e.groupCount) && n(e.dataWidth) && n(e.driveNominalBytesDecimal) && n(e.metadataReserveFraction) &&
+    isNumber(p.capacity?.usableBytes)
+  ) {
+    const bound = e.groupCount * e.dataWidth * e.driveNominalBytesDecimal * (1 - e.metadataReserveFraction);
+    if (p.capacity.usableBytes > bound) {
+      d.push({
+        path: 'capacity.usableBytes',
+        message:
+          'declared usable exceeds groupCount × dataWidth × driveNominalBytesDecimal × (1 − metadataReserveFraction)',
+      });
+    }
+  }
 }
 
 export function validateWorkload(w: WorkloadProfile): ValidationResult {

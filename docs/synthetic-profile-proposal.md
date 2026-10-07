@@ -19,17 +19,17 @@ Units: capacity in TiB (1 TiB = 2^40 bytes); block sizes in KiB (1 KiB = 1,024 b
 
 ## 1. Infrastructure profiles
 
-Two profiles are synthetic protection-layout variants with equal declared raw capacity, equal declared limits, and identical existing logical demand; they differ only in protection layout. This is what makes the RAID 5 versus RAID 6 comparison coherent: same raw capacity, same declared front-end and backend limits, same existing *logical* trace, different usable capacity and different *derived* backend load. "Equal raw capacity and declared limits" is an abstract comparison device; it does not establish an identical physical drive arrangement, and the profiles should not be described as "the same hardware".
+Two profiles are synthetic protection-layout variants with equal declared performance limits, distinct drive populations (47 vs 42 drives), and identical existing logical demand; they differ in protection layout and drive population. This is what makes the RAID 5 versus RAID 6 comparison coherent: same declared front-end and backend limits, same existing *logical* trace, different usable capacity and different *derived* backend load. Equal declared limits are a comparison device; they do not establish an identical physical drive arrangement, and the profiles should not be described as "the same hardware". The fictional environment behind these profiles is specified in `docs/environment-profile-proposal.md` (accepted 0.2, October 7, 2026).
 
 | Attribute | INF-A "Midrange all-flash, RAID 5 (8+1)" | INF-B "Midrange all-flash, RAID 6 (8+2)" | Marker / note |
 |---|---|---|---|
 | Synthetic flag | true | true | required |
-| Modeled raw capacity | 225 TiB | 225 TiB | [A] used only to derive usable; not an input to any rule |
-| Protection layout | RAID 5, 8 data + 1 parity | RAID 6, 8 data + 2 parity | [A] |
-| Usable capacity (after protection) | **200 TiB** (= 225 × 8/9) | **180 TiB** (= 225 × 8/10) | [D] ignores spares/metadata reserve, stated as exclusion |
-| Capacity operating budget (80%) | 160 TiB | 144 TiB | [D] |
-| Used capacity at trace start | 100 TiB | 100 TiB | [A] |
-| Used capacity at trace end (week) | ≈ 100.27 TiB | ≈ 100.27 TiB | [D] 100 × 1.15^(7/365.25); linear within the week |
+| Populated drives / raw (decimal) | 47 × 7.68 TB = 360.96 TB | 42 × 7.68 TB = 322.56 TB | [A] descriptive environment only; not an input to any rule — see `docs/environment-profile-proposal.md` |
+| Protection layout | RAID 5, 5 groups of 8+1 | RAID 6, 4 groups of 8+2 | [A] distinct drive populations, not identical hardware |
+| Usable capacity (after parity, spares, 5 % metadata reserve, rounded down) | **265 TiB** | **212 TiB** | [D] environment-profile-proposal §4 |
+| Capacity operating budget (80%) | 212 TiB | 169.6 TiB | [D] |
+| Used capacity at trace start | 120 TiB | 120 TiB | [A] |
+| Used capacity at trace end (week) | ≈ 120.32 TiB | ≈ 120.32 TiB | [D] 120 × 1.15^(7/365.25); linear within the week |
 | Existing annual capacity growth | 15 % / yr | 15 % / yr | [A] |
 | Sustainable front-end IOPS limit | 150,000 | 150,000 | [A] declared, not derived from drive count |
 | Front-end IOPS budget (80%) | 120,000 | 120,000 | [D] |
@@ -146,6 +146,8 @@ Alternative (not recommended for V1): scale as ceil(size / backend block) blocks
 ---
 
 ## 5. Expected assessment matrix [D]
+
+Note: the capacity and growth figures below predate the environment-profile decision (ENV-1..ENV-5, October 7, 2026) and use the retired 225 TiB / 200 / 180 TiB fiction with 100 TiB used. Recalculated values — no status changes — are in `docs/environment-profile-proposal.md` §6. Performance rows (IOPS, backend, throughput, latency, protection) are unchanged.
 
 Budget denominators: percentages below are **% of operating budget** (review D-3). Horizon for the growth dimension is 1 year by default (review D-4). Latency post-addition is always needs investigation in V1.
 

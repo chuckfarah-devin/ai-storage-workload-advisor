@@ -1,7 +1,7 @@
 # AI Storage Workload Advisor
-## Environment profile proposal — draft 0.1 (for Chuck's review; not yet applied)
+## Environment profile proposal — accepted 0.2 (applied in M2)
 
-Prepared by Devin, October 6, 2026, between M1 and M2. This proposes a physically coherent **fictional** storage environment to anchor the synthetic profiles. Nothing here has been applied to `data/profiles/*.json`, the golden fixtures, or the specifications; §6 shows what would change if Chuck accepts it.
+Prepared by Devin, October 6, 2026, between M1 and M2; decided by Chuck October 7, 2026 (see §8 and DECISIONS.md). This describes the physically coherent **fictional** storage environment that anchors the synthetic profiles. Version 0.1 was a proposal; 0.2 records the decisions and is the reference the M2 fixtures implement. §6 shows what changed in the M1 per-sample assessments.
 
 Label carried by all profiles: *Synthetic data. Educational demonstration; not vendor sizing or production configuration guidance.*
 
@@ -13,7 +13,7 @@ Markers as in `synthetic-profile-proposal.md`: **[S]** sourced fact, **[D]** der
 
 | Element | Proposed value | Notes |
 |---|---|---|
-| Array class | Vendor-neutral midrange all-flash block array, dual controller, active-active, single 48-slot 2U NVMe enclosure | fictional; no vendor implied |
+| Array class | Vendor-neutral midrange all-flash block array, dual controller, active-active, single 48-slot NVMe enclosure | fictional; slot count is a declared assumption, not a researched physical design; no vendor implied |
 | Media | NVMe TLC SSD, 7.68 TB nominal (manufacturer-style decimal) | endurance, over-provisioning internals and flash write amplification not modeled |
 | Drive nominal capacity | 7.68 TB = 7,680,000,000,000 bytes = **6.985 TiB** [D] | decimal-to-binary conversion shown in §4 |
 | Controllers | 2, each with mirrored write-back cache (NVRAM-protected) | cache size not an input to any rule; destage modeled as 1:1 with no coalescing |
@@ -23,7 +23,7 @@ Markers as in `synthetic-profile-proposal.md`: **[S]** sourced fact, **[D]** der
 
 ## 2. Protection variants [A]
 
-The two variants populate the same enclosure differently. They are **not** identical hardware; they share the controller pair, enclosure, media type and front-end limits, and differ in drive count, RAID layout, usable capacity, tolerated failures and (recommended) backend limit.
+The two variants populate the same enclosure differently. They are **not** identical hardware; they share the controller pair, enclosure, media type and front-end limits, and differ in drive count, RAID layout, usable capacity and tolerated failures. Both variants carry the same independently declared backend limit (ENV-3).
 
 | Attribute | Variant A — RAID 5 (8+1) | Variant B — RAID 6 (8+2) |
 |---|---|---|
@@ -81,15 +81,15 @@ The performance limits are **declared synthetic sustained figures** for the cont
 | Sustainable throughput | 3,000 MiB/s | 3,000 MiB/s | [A] controller-bound sustained mixed-workload figure |
 | Throughput budget | 2,400 MiB/s | 2,400 MiB/s | [D] |
 | Host connectivity | 8 × 32 Gb/s FC | 8 × 32 Gb/s FC | descriptive; aggregate nominal line rate is far above the declared throughput limit, so connectivity is *not* the modeled constraint and is not used in any rule |
-| Backend sustainable operations (16 KiB) | **250,000 ops/s** (45 group drives) | **222,000 ops/s** (40 group drives) — recommended; alternative: keep 250,000 | [A] see below |
-| Backend budget | 200,000 | 177,600 (alt. 200,000) | [D] |
+| Backend sustainable operations (16 KiB) | **250,000 ops/s** | **250,000 ops/s** | [A] independently declared for each variant; see below |
+| Backend budget | 200,000 | 200,000 | [D] |
 | Modeled backend block | 16 KiB | 16 KiB | unchanged |
 | Read-cache hit fraction | 0.30 | 0.30 | unchanged simplification |
 | Write policy | write-back, 1:1 destage, no coalescing | same | unchanged |
 
-Backend limit for Variant B: with 40 group drives instead of 45, keeping 250,000 would be incoherent with the physical story. The recommended 222,000 is 250,000 scaled by 40/45 and rounded — a *declared* figure that is proportional to the drive set but still not "drive IOPS × count" (no per-drive IOPS is declared anywhere). Chuck may prefer the alternative (equal 250,000) if he wants the readiness comparison to isolate the layout factor alone; the proposed-only overhead comparison already does that in both options.
+Backend limit (ENV-3, decided): both variants declare **250,000 ops/s** as independent synthetic limits. Draft 0.1 recommended scaling Variant B to 222,000 (250,000 × 40/45) and called equal limits "incoherent with the physical story"; that assertion was withdrawn. Drive count alone does not establish sustainable array performance, so neither equal limits nor drive-count scaling establishes actual array capability — scaling would have introduced an unvalidated performance relationship even when labeled as a declared assumption. Equal limits also keep the demonstration clearer (different RAID write overhead against the same declared performance envelope) and keep the hidden-burst example robust (bucket mean 177,475 vs budget 200,000, rather than 125 ops/s under a 177,600 budget).
 
-Baseline latency (0.6/0.9/1.4/1.2/0.7 ms by period; weekly P95 1.2 ms, max 1.4 ms) is unchanged.
+Baseline latency (0.6/0.9/1.4/1.2/0.7 ms by period) is unchanged. M2 derives the weekly statistics from the trace rather than declaring them; the expected weekly P95 remains 1.2 ms and max 1.4 ms, with P90 expected at 0.9 ms (the 900 batch minutes at 1.2 ms plus 100 burst minutes at 1.4 ms fill 1,000 of the top 1,008 ranks; the next ranks are business-hours minutes at 0.9 ms).
 
 ## 6. Impact analysis — what changes in the M1 per-sample assessments [D]
 
@@ -114,21 +114,9 @@ Workloads unchanged: WL-VM 24 TiB, 10 %/yr; WL-RAG 30 TiB, 40 %/yr. Percentages 
 
 Every capacity/growth status is preserved. The 3-year VM-on-A case becomes a narrow constraint (101 %), which is a useful teaching point: a small change in growth assumptions would flip it, and the finding should say so.
 
-### Backend IOPS (only if Variant B's limit is scaled to 222,000)
+### Backend IOPS, front-end IOPS, throughput
 
-| Sample on Variant B | Combined backend ops | Today (budget 200,000) | Proposed (budget 177,600) | Status change |
-|---|---|---|---|---|
-| vm-weekday-quiet | 54,960 | 27.5 % | 30.9 % | none |
-| vm-weekday-business | 148,850 | 74.4 % | 83.8 % | none |
-| vm-weekday-burst | 206,100 | 103.1 % constraint, headroom −6,100 | **116.0 % constraint, headroom −28,500** | none (stronger) |
-| vm-weekday-patch | 97,450 | 48.7 % | 54.9 % | none |
-| vm-weekday-batch | 164,360 | 82.2 % | 92.5 % | none |
-| rag-weekday-business-query | 151,400 | 75.7 % | 85.2 % | none |
-| rag-weekday-burst-query | 208,650 | 104.3 % constraint | 117.5 % constraint | none |
-| rag-weekday-batch-offhours | 165,040 | 82.5 % | 92.9 % | none |
-| existing baseline alone, burst | 171,750 | 85.9 % | 96.7 % (still within budget) | none |
-
-Variant A backend, all front-end IOPS and throughput checks are unchanged. The "front-end headroom (75 %) but backend constraint" demonstration is preserved in both backend-limit options; the scaled option makes the exceedance larger and the batch windows tighter (≈93 %), which is realistic for a smaller RAID 6 drive set but leaves less visual slack in the M2 weekly chart. If Chuck wants the demonstration to hinge on the layout factor alone, choose the equal-limit alternative.
+Unchanged on both variants (ENV-3 keeps 250,000 ops/s for Variant B). The "front-end headroom (75 %) but backend constraint" demonstration is preserved exactly: vm-weekday-burst on Variant B remains 206,100 vs 200,000 (103.1 %, headroom −6,100); rag-weekday-burst-query 208,650 (104.3 %); the existing baseline alone at burst is 171,750 (85.9 %). The withdrawn scaled-limit table from draft 0.1 is not retained.
 
 ### Overall statuses
 
@@ -151,14 +139,14 @@ Add a descriptive `environment` block to each infrastructure profile so the phys
 
 Validation should assert internal coherence of the descriptive block (declared usable ≤ (driveCount − spares − parityDrives) × driveNominalBytes × (1 − reserve)) so a future edit cannot quietly declare more usable capacity than the fiction allows.
 
-## 8. Decisions for Chuck
+## 8. Decisions (Chuck, October 7, 2026)
 
-| ID | Decision | Recommendation |
-|---|---|---|
-| ENV-1 | Accept the drive/enclosure fiction (7.68 TB NVMe, 47 vs 42 populated drives, 5 % reserve, 2 spares) | accept |
-| ENV-2 | Declared usable 265 / 212 TiB and used 120 TiB | accept |
-| ENV-3 | Variant B backend limit: scaled 222,000 (physically coherent) vs equal 250,000 (isolates layout factor) | **scaled 222,000** |
-| ENV-4 | Keep front-end limits 150,000 IOPS / 3,000 MiB/s for both variants (controller-bound) | accept |
-| ENV-5 | Add the descriptive `environment` block and coherence validation in M2 | accept |
+| ID | Decision | Devin recommended | Chuck decided |
+|---|---|---|---|
+| ENV-1 | Accept the drive/enclosure fiction (7.68 TB NVMe, 48-slot enclosure, 47 vs 42 populated drives, 5 % reserve, 2 spares) | accept | **accepted**; enclosure stays explicitly fictional — 48 slots is declared, not a researched physical design |
+| ENV-2 | Declared usable 265 / 212 TiB and used 120 TiB | accept | **accepted** |
+| ENV-3 | Variant B backend limit: scaled 222,000 vs equal 250,000 | scaled 222,000 | **equal 250,000** — independently declared synthetic limits; the "incoherent" assertion is withdrawn (see §5) |
+| ENV-4 | Keep front-end limits 150,000 IOPS / 3,000 MiB/s for both variants (controller-bound) | accept | **accepted** |
+| ENV-5 | Add the descriptive `environment` block and coherence validation in M2 | accept | **accepted** |
 
-Once decided, M2 applies the values to `data/profiles`, regenerates the M1 golden fixtures (expected diffs are exactly the rows in §6), and updates `synthetic-profile-proposal.md` §1 to reference this document.
+M2 applies these values to `data/profiles`, regenerates the M1 golden fixtures (expected diffs are exactly the capacity/growth rows in §6), and `synthetic-profile-proposal.md` §1 refers to this document for the environment.

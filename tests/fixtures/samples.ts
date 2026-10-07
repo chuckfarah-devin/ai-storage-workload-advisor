@@ -38,7 +38,7 @@ function sample(
       readBlockBytes: blocks.proposedRead,
       writeBlockBytes: blocks.proposedWrite,
     },
-    usedCapacityBytes: 100 * TIB,
+    usedCapacityBytes: 120 * TIB,
     baselineLatency: { p95Ms: 1.2, maxMs: 1.4 },
     backgroundBackendOpsPerSecond: 0,
   };

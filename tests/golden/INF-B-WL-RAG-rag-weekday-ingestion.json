@@ -17,11 +17,11 @@
           "id": "capacity",
           "status": "modeled-ready",
           "headroom": {
-            "value": 15393162788864,
+            "value": 21550427904409.625,
             "unit": "bytes"
           },
-          "budgetUtilization": 0.9027777777777778,
-          "limitUtilization": 0.7222222222222222,
+          "budgetUtilization": 0.8844339622641508,
+          "limitUtilization": 0.7075471698113207,
           "findings": [
             {
               "ruleId": "R-CAP-1",
@@ -29,7 +29,7 @@
               "evidence": [
                 {
                   "label": "existing used capacity",
-                  "value": 109951162777600,
+                  "value": 131941395333120,
                   "unit": "bytes",
                   "basis": "aligned demand sample"
                 },
@@ -41,18 +41,18 @@
                 },
                 {
                   "label": "capacity operating budget",
-                  "value": 158329674399744,
+                  "value": 186477172070809.62,
                   "unit": "bytes",
                   "basis": "0.8 × usable capacity"
                 },
                 {
                   "label": "usable capacity limit",
-                  "value": 197912092999680,
+                  "value": 233096465088512,
                   "unit": "bytes",
                   "basis": "synthetic infrastructure profile"
                 }
               ],
-              "calculation": "100 TiB used + 30 TiB proposed = 130 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 14 TiB.",
+              "calculation": "120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.",
               "implication": "Modeled capacity headroom exists for the proposed workload at the declared synthetic values.",
               "nextInvestigation": "Confirm real usable capacity and current consumption before relying on this result.",
               "confidence": "high",
@@ -398,11 +398,11 @@
           "id": "growth",
           "status": "modeled-constraint",
           "headroom": {
-            "value": -14293651161088,
+            "value": -11434920928870.375,
             "unit": "bytes"
           },
-          "budgetUtilization": 1.0902777777777777,
-          "limitUtilization": 0.8722222222222222,
+          "budgetUtilization": 1.061320754716981,
+          "limitUtilization": 0.8490566037735849,
           "findings": [
             {
               "ruleId": "R-GRO-1",
@@ -410,7 +410,7 @@
               "evidence": [
                 {
                   "label": "existing used capacity",
-                  "value": 109951162777600,
+                  "value": 131941395333120,
                   "unit": "bytes",
                   "basis": "aligned demand sample"
                 },
@@ -440,12 +440,12 @@
                 },
                 {
                   "label": "capacity operating budget",
-                  "value": 158329674399744,
+                  "value": 186477172070809.62,
                   "unit": "bytes",
                   "basis": "0.8 × usable capacity"
                 }
               ],
-              "calculation": "projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 144 TiB budget; headroom -13 TiB.",
+              "calculation": "projected = 120 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 180 TiB vs 169.6 TiB budget; headroom -10.4 TiB.",
               "implication": "Growth projection exceeds the capacity operating budget within 1 year(s); capacity expansion timing becomes a planning constraint.",
               "nextInvestigation": "Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.",
               "confidence": "high",

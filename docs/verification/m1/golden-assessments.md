@@ -1,6 +1,6 @@
 # M1 golden per-sample assessments
 
-Generated: 2026-10-06T18:42:52.475Z
+Generated: 2026-10-07T13:18:51.230Z
 Ruleset: 1.0.0-m1   Commit: uncommitted (M1 pre-review)
 Label: Synthetic data. Educational demonstration; not vendor sizing or production configuration guidance.
 
@@ -18,15 +18,15 @@ Infrastructure: INF-A   Workload: WL-VM   Sample: vm-weekday-quiet
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 36 TiB
-    % of operating budget: 77.5%   % of limit: 62.0%
+    headroom: 68 TiB
+    % of operating budget: 67.9%   % of limit: 54.3%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 36 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -133,17 +133,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 18.6 TiB
-    % of operating budget: 88.4%   % of limit: 70.7%
+    headroom: 47.6 TiB
+    % of operating budget: 77.5%   % of limit: 62.0%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 160 TiB budget; headroom 18.6 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 212 TiB budget; headroom 47.6 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -162,15 +162,15 @@ Infrastructure: INF-A   Workload: WL-VM   Sample: vm-weekday-business
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 36 TiB
-    % of operating budget: 77.5%   % of limit: 62.0%
+    headroom: 68 TiB
+    % of operating budget: 67.9%   % of limit: 54.3%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 36 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -277,17 +277,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 18.6 TiB
-    % of operating budget: 88.4%   % of limit: 70.7%
+    headroom: 47.6 TiB
+    % of operating budget: 77.5%   % of limit: 62.0%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 160 TiB budget; headroom 18.6 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 212 TiB budget; headroom 47.6 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -306,15 +306,15 @@ Infrastructure: INF-A   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 36 TiB
-    % of operating budget: 77.5%   % of limit: 62.0%
+    headroom: 68 TiB
+    % of operating budget: 67.9%   % of limit: 54.3%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 36 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -421,17 +421,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 18.6 TiB
-    % of operating budget: 88.4%   % of limit: 70.7%
+    headroom: 47.6 TiB
+    % of operating budget: 77.5%   % of limit: 62.0%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 160 TiB budget; headroom 18.6 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 212 TiB budget; headroom 47.6 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -450,15 +450,15 @@ Infrastructure: INF-A   Workload: WL-VM   Sample: vm-weekday-patch
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 36 TiB
-    % of operating budget: 77.5%   % of limit: 62.0%
+    headroom: 68 TiB
+    % of operating budget: 67.9%   % of limit: 54.3%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 36 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -565,17 +565,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 18.6 TiB
-    % of operating budget: 88.4%   % of limit: 70.7%
+    headroom: 47.6 TiB
+    % of operating budget: 77.5%   % of limit: 62.0%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 160 TiB budget; headroom 18.6 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 212 TiB budget; headroom 47.6 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -594,15 +594,15 @@ Infrastructure: INF-A   Workload: WL-VM   Sample: vm-weekday-batch
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 36 TiB
-    % of operating budget: 77.5%   % of limit: 62.0%
+    headroom: 68 TiB
+    % of operating budget: 67.9%   % of limit: 54.3%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 36 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -709,17 +709,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 18.6 TiB
-    % of operating budget: 88.4%   % of limit: 70.7%
+    headroom: 47.6 TiB
+    % of operating budget: 77.5%   % of limit: 62.0%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 160 TiB budget; headroom 18.6 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 212 TiB budget; headroom 47.6 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -740,15 +740,15 @@ Infrastructure: INF-A   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 1.5x, horizon 0 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 36 TiB
-    % of operating budget: 77.5%   % of limit: 62.0%
+    headroom: 68 TiB
+    % of operating budget: 67.9%   % of limit: 54.3%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 36 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -855,17 +855,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 36 TiB
-    % of operating budget: 77.5%   % of limit: 62.0%
+    headroom: 68 TiB
+    % of operating budget: 67.9%   % of limit: 54.3%
     Finding R-GRO-1: Projected capacity at the 0-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 0 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^0 + 24 TiB × (1 + 0.1)^0 = 124 TiB vs 160 TiB budget; headroom 36 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^0 + 24 TiB × (1 + 0.1)^0 = 144 TiB vs 212 TiB budget; headroom 68 TiB.
       implication: The modeled environment retains capacity headroom at the 0-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -884,15 +884,15 @@ Infrastructure: INF-A   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 1.5x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 36 TiB
-    % of operating budget: 77.5%   % of limit: 62.0%
+    headroom: 68 TiB
+    % of operating budget: 67.9%   % of limit: 54.3%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 36 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -999,17 +999,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 18.6 TiB
-    % of operating budget: 88.4%   % of limit: 70.7%
+    headroom: 47.6 TiB
+    % of operating budget: 77.5%   % of limit: 62.0%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 160 TiB budget; headroom 18.6 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 212 TiB budget; headroom 47.6 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -1028,15 +1028,15 @@ Infrastructure: INF-A   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 1.5x, horizon 3 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 36 TiB
-    % of operating budget: 77.5%   % of limit: 62.0%
+    headroom: 68 TiB
+    % of operating budget: 67.9%   % of limit: 54.3%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 36 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -1143,17 +1143,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -24.03 TiB
-    % of operating budget: 115.0%   % of limit: 92.0%
+    headroom: -2.45 TiB
+    % of operating budget: 101.2%   % of limit: 80.9%
     Finding R-GRO-1: Projected capacity at the 3-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 3 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^3 + 24 TiB × (1 + 0.1)^3 = 184.03 TiB vs 160 TiB budget; headroom -24.03 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^3 + 24 TiB × (1 + 0.1)^3 = 214.45 TiB vs 212 TiB budget; headroom -2.45 TiB.
       implication: Growth projection exceeds the capacity operating budget within 3 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -1172,15 +1172,15 @@ Infrastructure: INF-A   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 2x, horizon 0 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 36 TiB
-    % of operating budget: 77.5%   % of limit: 62.0%
+    headroom: 68 TiB
+    % of operating budget: 67.9%   % of limit: 54.3%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 36 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -1287,17 +1287,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 36 TiB
-    % of operating budget: 77.5%   % of limit: 62.0%
+    headroom: 68 TiB
+    % of operating budget: 67.9%   % of limit: 54.3%
     Finding R-GRO-1: Projected capacity at the 0-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 0 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^0 + 24 TiB × (1 + 0.1)^0 = 124 TiB vs 160 TiB budget; headroom 36 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^0 + 24 TiB × (1 + 0.1)^0 = 144 TiB vs 212 TiB budget; headroom 68 TiB.
       implication: The modeled environment retains capacity headroom at the 0-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -1316,15 +1316,15 @@ Infrastructure: INF-A   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 2x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 36 TiB
-    % of operating budget: 77.5%   % of limit: 62.0%
+    headroom: 68 TiB
+    % of operating budget: 67.9%   % of limit: 54.3%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 36 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -1431,17 +1431,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 18.6 TiB
-    % of operating budget: 88.4%   % of limit: 70.7%
+    headroom: 47.6 TiB
+    % of operating budget: 77.5%   % of limit: 62.0%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 160 TiB budget; headroom 18.6 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 212 TiB budget; headroom 47.6 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -1460,15 +1460,15 @@ Infrastructure: INF-A   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 2x, horizon 3 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 36 TiB
-    % of operating budget: 77.5%   % of limit: 62.0%
+    headroom: 68 TiB
+    % of operating budget: 67.9%   % of limit: 54.3%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 36 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 68 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -1575,17 +1575,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -24.03 TiB
-    % of operating budget: 115.0%   % of limit: 92.0%
+    headroom: -2.45 TiB
+    % of operating budget: 101.2%   % of limit: 80.9%
     Finding R-GRO-1: Projected capacity at the 3-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 3 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^3 + 24 TiB × (1 + 0.1)^3 = 184.03 TiB vs 160 TiB budget; headroom -24.03 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^3 + 24 TiB × (1 + 0.1)^3 = 214.45 TiB vs 212 TiB budget; headroom -2.45 TiB.
       implication: Growth projection exceeds the capacity operating budget within 3 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -1607,15 +1607,15 @@ Infrastructure: INF-B   Workload: WL-VM   Sample: vm-weekday-quiet
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 20 TiB
-    % of operating budget: 86.1%   % of limit: 68.9%
+    headroom: 25.6 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 20 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -1722,17 +1722,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 2.6 TiB
-    % of operating budget: 98.2%   % of limit: 78.6%
+    headroom: 5.2 TiB
+    % of operating budget: 96.9%   % of limit: 77.5%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 144 TiB budget; headroom 2.6 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 169.6 TiB budget; headroom 5.2 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -1751,15 +1751,15 @@ Infrastructure: INF-B   Workload: WL-VM   Sample: vm-weekday-business
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 20 TiB
-    % of operating budget: 86.1%   % of limit: 68.9%
+    headroom: 25.6 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 20 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -1866,17 +1866,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 2.6 TiB
-    % of operating budget: 98.2%   % of limit: 78.6%
+    headroom: 5.2 TiB
+    % of operating budget: 96.9%   % of limit: 77.5%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 144 TiB budget; headroom 2.6 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 169.6 TiB budget; headroom 5.2 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -1895,15 +1895,15 @@ Infrastructure: INF-B   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 20 TiB
-    % of operating budget: 86.1%   % of limit: 68.9%
+    headroom: 25.6 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 20 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -2010,17 +2010,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 2.6 TiB
-    % of operating budget: 98.2%   % of limit: 78.6%
+    headroom: 5.2 TiB
+    % of operating budget: 96.9%   % of limit: 77.5%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 144 TiB budget; headroom 2.6 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 169.6 TiB budget; headroom 5.2 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -2039,15 +2039,15 @@ Infrastructure: INF-B   Workload: WL-VM   Sample: vm-weekday-patch
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 20 TiB
-    % of operating budget: 86.1%   % of limit: 68.9%
+    headroom: 25.6 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 20 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -2154,17 +2154,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 2.6 TiB
-    % of operating budget: 98.2%   % of limit: 78.6%
+    headroom: 5.2 TiB
+    % of operating budget: 96.9%   % of limit: 77.5%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 144 TiB budget; headroom 2.6 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 169.6 TiB budget; headroom 5.2 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -2183,15 +2183,15 @@ Infrastructure: INF-B   Workload: WL-VM   Sample: vm-weekday-batch
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 20 TiB
-    % of operating budget: 86.1%   % of limit: 68.9%
+    headroom: 25.6 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 20 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -2298,17 +2298,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 2.6 TiB
-    % of operating budget: 98.2%   % of limit: 78.6%
+    headroom: 5.2 TiB
+    % of operating budget: 96.9%   % of limit: 77.5%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 144 TiB budget; headroom 2.6 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 169.6 TiB budget; headroom 5.2 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -2329,15 +2329,15 @@ Infrastructure: INF-B   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 1.5x, horizon 0 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 20 TiB
-    % of operating budget: 86.1%   % of limit: 68.9%
+    headroom: 25.6 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 20 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -2444,17 +2444,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 20 TiB
-    % of operating budget: 86.1%   % of limit: 68.9%
+    headroom: 25.6 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-GRO-1: Projected capacity at the 0-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 0 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^0 + 24 TiB × (1 + 0.1)^0 = 124 TiB vs 144 TiB budget; headroom 20 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^0 + 24 TiB × (1 + 0.1)^0 = 144 TiB vs 169.6 TiB budget; headroom 25.6 TiB.
       implication: The modeled environment retains capacity headroom at the 0-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -2473,15 +2473,15 @@ Infrastructure: INF-B   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 1.5x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 20 TiB
-    % of operating budget: 86.1%   % of limit: 68.9%
+    headroom: 25.6 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 20 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -2588,17 +2588,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 2.6 TiB
-    % of operating budget: 98.2%   % of limit: 78.6%
+    headroom: 5.2 TiB
+    % of operating budget: 96.9%   % of limit: 77.5%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 144 TiB budget; headroom 2.6 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 169.6 TiB budget; headroom 5.2 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -2617,15 +2617,15 @@ Infrastructure: INF-B   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 1.5x, horizon 3 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 20 TiB
-    % of operating budget: 86.1%   % of limit: 68.9%
+    headroom: 25.6 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 20 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -2732,17 +2732,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -40.03 TiB
-    % of operating budget: 127.8%   % of limit: 102.2%
+    headroom: -44.85 TiB
+    % of operating budget: 126.4%   % of limit: 101.2%
     Finding R-GRO-1: Projected capacity at the 3-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 3 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^3 + 24 TiB × (1 + 0.1)^3 = 184.03 TiB vs 144 TiB budget; headroom -40.03 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^3 + 24 TiB × (1 + 0.1)^3 = 214.45 TiB vs 169.6 TiB budget; headroom -44.85 TiB.
       implication: Growth projection exceeds the capacity operating budget within 3 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -2761,15 +2761,15 @@ Infrastructure: INF-B   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 2x, horizon 0 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 20 TiB
-    % of operating budget: 86.1%   % of limit: 68.9%
+    headroom: 25.6 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 20 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -2876,17 +2876,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 20 TiB
-    % of operating budget: 86.1%   % of limit: 68.9%
+    headroom: 25.6 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-GRO-1: Projected capacity at the 0-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 0 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^0 + 24 TiB × (1 + 0.1)^0 = 124 TiB vs 144 TiB budget; headroom 20 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^0 + 24 TiB × (1 + 0.1)^0 = 144 TiB vs 169.6 TiB budget; headroom 25.6 TiB.
       implication: The modeled environment retains capacity headroom at the 0-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -2905,15 +2905,15 @@ Infrastructure: INF-B   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 2x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 20 TiB
-    % of operating budget: 86.1%   % of limit: 68.9%
+    headroom: 25.6 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 20 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -3020,17 +3020,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 2.6 TiB
-    % of operating budget: 98.2%   % of limit: 78.6%
+    headroom: 5.2 TiB
+    % of operating budget: 96.9%   % of limit: 77.5%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 141.4 TiB vs 144 TiB budget; headroom 2.6 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 24 TiB × (1 + 0.1)^1 = 164.4 TiB vs 169.6 TiB budget; headroom 5.2 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -3049,15 +3049,15 @@ Infrastructure: INF-B   Workload: WL-VM   Sample: vm-weekday-burst
 Options: demand multiplier 2x, horizon 3 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 20 TiB
-    % of operating budget: 86.1%   % of limit: 68.9%
+    headroom: 25.6 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 24 TiB proposed = 124 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 20 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 24 TiB proposed = 144 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 25.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -3164,17 +3164,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -40.03 TiB
-    % of operating budget: 127.8%   % of limit: 102.2%
+    headroom: -44.85 TiB
+    % of operating budget: 126.4%   % of limit: 101.2%
     Finding R-GRO-1: Projected capacity at the 3-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 26388279066624 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.1 fraction (basis: synthetic workload profile)
         - planning horizon: 3 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^3 + 24 TiB × (1 + 0.1)^3 = 184.03 TiB vs 144 TiB budget; headroom -40.03 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^3 + 24 TiB × (1 + 0.1)^3 = 214.45 TiB vs 169.6 TiB budget; headroom -44.85 TiB.
       implication: Growth projection exceeds the capacity operating budget within 3 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -3196,15 +3196,15 @@ Infrastructure: INF-A   Workload: WL-RAG   Sample: rag-weekday-business-query
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 30 TiB
-    % of operating budget: 81.3%   % of limit: 65.0%
+    headroom: 62 TiB
+    % of operating budget: 70.8%   % of limit: 56.6%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 30 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -3311,17 +3311,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 3 TiB
-    % of operating budget: 98.1%   % of limit: 78.5%
+    headroom: 32 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 160 TiB budget; headroom 3 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 180 TiB vs 212 TiB budget; headroom 32 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -3340,15 +3340,15 @@ Infrastructure: INF-A   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 30 TiB
-    % of operating budget: 81.3%   % of limit: 65.0%
+    headroom: 62 TiB
+    % of operating budget: 70.8%   % of limit: 56.6%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 30 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -3455,17 +3455,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 3 TiB
-    % of operating budget: 98.1%   % of limit: 78.5%
+    headroom: 32 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 160 TiB budget; headroom 3 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 180 TiB vs 212 TiB budget; headroom 32 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -3484,15 +3484,15 @@ Infrastructure: INF-A   Workload: WL-RAG   Sample: rag-weekday-ingestion
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 30 TiB
-    % of operating budget: 81.3%   % of limit: 65.0%
+    headroom: 62 TiB
+    % of operating budget: 70.8%   % of limit: 56.6%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 30 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -3596,17 +3596,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 3 TiB
-    % of operating budget: 98.1%   % of limit: 78.5%
+    headroom: 32 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 160 TiB budget; headroom 3 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 180 TiB vs 212 TiB budget; headroom 32 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -3625,15 +3625,15 @@ Infrastructure: INF-A   Workload: WL-RAG   Sample: rag-weekday-batch-offhours
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 30 TiB
-    % of operating budget: 81.3%   % of limit: 65.0%
+    headroom: 62 TiB
+    % of operating budget: 70.8%   % of limit: 56.6%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 30 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -3740,17 +3740,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 3 TiB
-    % of operating budget: 98.1%   % of limit: 78.5%
+    headroom: 32 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 160 TiB budget; headroom 3 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 180 TiB vs 212 TiB budget; headroom 32 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -3771,15 +3771,15 @@ Infrastructure: INF-A   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 1.5x, horizon 0 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 30 TiB
-    % of operating budget: 81.3%   % of limit: 65.0%
+    headroom: 62 TiB
+    % of operating budget: 70.8%   % of limit: 56.6%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 30 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -3886,17 +3886,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 30 TiB
-    % of operating budget: 81.3%   % of limit: 65.0%
+    headroom: 62 TiB
+    % of operating budget: 70.8%   % of limit: 56.6%
     Finding R-GRO-1: Projected capacity at the 0-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 0 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^0 + 30 TiB × (1 + 0.4)^0 = 130 TiB vs 160 TiB budget; headroom 30 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^0 + 30 TiB × (1 + 0.4)^0 = 150 TiB vs 212 TiB budget; headroom 62 TiB.
       implication: The modeled environment retains capacity headroom at the 0-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -3915,15 +3915,15 @@ Infrastructure: INF-A   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 1.5x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 30 TiB
-    % of operating budget: 81.3%   % of limit: 65.0%
+    headroom: 62 TiB
+    % of operating budget: 70.8%   % of limit: 56.6%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 30 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -4030,17 +4030,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 3 TiB
-    % of operating budget: 98.1%   % of limit: 78.5%
+    headroom: 32 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 160 TiB budget; headroom 3 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 180 TiB vs 212 TiB budget; headroom 32 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -4059,15 +4059,15 @@ Infrastructure: INF-A   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 1.5x, horizon 3 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 30 TiB
-    % of operating budget: 81.3%   % of limit: 65.0%
+    headroom: 62 TiB
+    % of operating budget: 70.8%   % of limit: 56.6%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 30 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -4174,17 +4174,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -74.41 TiB
-    % of operating budget: 146.5%   % of limit: 117.2%
+    headroom: -52.82 TiB
+    % of operating budget: 124.9%   % of limit: 99.9%
     Finding R-GRO-1: Projected capacity at the 3-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 3 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^3 + 30 TiB × (1 + 0.4)^3 = 234.41 TiB vs 160 TiB budget; headroom -74.41 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^3 + 30 TiB × (1 + 0.4)^3 = 264.82 TiB vs 212 TiB budget; headroom -52.82 TiB.
       implication: Growth projection exceeds the capacity operating budget within 3 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -4203,15 +4203,15 @@ Infrastructure: INF-A   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 2x, horizon 0 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 30 TiB
-    % of operating budget: 81.3%   % of limit: 65.0%
+    headroom: 62 TiB
+    % of operating budget: 70.8%   % of limit: 56.6%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 30 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -4318,17 +4318,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 30 TiB
-    % of operating budget: 81.3%   % of limit: 65.0%
+    headroom: 62 TiB
+    % of operating budget: 70.8%   % of limit: 56.6%
     Finding R-GRO-1: Projected capacity at the 0-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 0 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^0 + 30 TiB × (1 + 0.4)^0 = 130 TiB vs 160 TiB budget; headroom 30 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^0 + 30 TiB × (1 + 0.4)^0 = 150 TiB vs 212 TiB budget; headroom 62 TiB.
       implication: The modeled environment retains capacity headroom at the 0-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -4347,15 +4347,15 @@ Infrastructure: INF-A   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 2x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 30 TiB
-    % of operating budget: 81.3%   % of limit: 65.0%
+    headroom: 62 TiB
+    % of operating budget: 70.8%   % of limit: 56.6%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 30 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -4462,17 +4462,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 3 TiB
-    % of operating budget: 98.1%   % of limit: 78.5%
+    headroom: 32 TiB
+    % of operating budget: 84.9%   % of limit: 67.9%
     Finding R-GRO-1: Projected capacity at the 1-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 160 TiB budget; headroom 3 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 180 TiB vs 212 TiB budget; headroom 32 TiB.
       implication: The modeled environment retains capacity headroom at the 1-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -4491,15 +4491,15 @@ Infrastructure: INF-A   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 2x, horizon 3 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 30 TiB
-    % of operating budget: 81.3%   % of limit: 65.0%
+    headroom: 62 TiB
+    % of operating budget: 70.8%   % of limit: 56.6%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 219902325555200 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 160 TiB budget (0.8 × 200 TiB usable); headroom 30 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 291370581360640 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 212 TiB budget (0.8 × 265 TiB usable); headroom 62 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -4606,17 +4606,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -74.41 TiB
-    % of operating budget: 146.5%   % of limit: 117.2%
+    headroom: -52.82 TiB
+    % of operating budget: 124.9%   % of limit: 99.9%
     Finding R-GRO-1: Projected capacity at the 3-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 3 years (basis: assessment option)
-        - capacity operating budget: 175921860444160 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^3 + 30 TiB × (1 + 0.4)^3 = 234.41 TiB vs 160 TiB budget; headroom -74.41 TiB.
+        - capacity operating budget: 233096465088512 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^3 + 30 TiB × (1 + 0.4)^3 = 264.82 TiB vs 212 TiB budget; headroom -52.82 TiB.
       implication: Growth projection exceeds the capacity operating budget within 3 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -4638,15 +4638,15 @@ Infrastructure: INF-B   Workload: WL-RAG   Sample: rag-weekday-business-query
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 14 TiB
-    % of operating budget: 90.3%   % of limit: 72.2%
+    headroom: 19.6 TiB
+    % of operating budget: 88.4%   % of limit: 70.8%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 14 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -4753,17 +4753,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -13 TiB
-    % of operating budget: 109.0%   % of limit: 87.2%
+    headroom: -10.4 TiB
+    % of operating budget: 106.1%   % of limit: 84.9%
     Finding R-GRO-1: Projected capacity at the 1-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 144 TiB budget; headroom -13 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 180 TiB vs 169.6 TiB budget; headroom -10.4 TiB.
       implication: Growth projection exceeds the capacity operating budget within 1 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -4782,15 +4782,15 @@ Infrastructure: INF-B   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 14 TiB
-    % of operating budget: 90.3%   % of limit: 72.2%
+    headroom: 19.6 TiB
+    % of operating budget: 88.4%   % of limit: 70.8%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 14 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -4897,17 +4897,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -13 TiB
-    % of operating budget: 109.0%   % of limit: 87.2%
+    headroom: -10.4 TiB
+    % of operating budget: 106.1%   % of limit: 84.9%
     Finding R-GRO-1: Projected capacity at the 1-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 144 TiB budget; headroom -13 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 180 TiB vs 169.6 TiB budget; headroom -10.4 TiB.
       implication: Growth projection exceeds the capacity operating budget within 1 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -4926,15 +4926,15 @@ Infrastructure: INF-B   Workload: WL-RAG   Sample: rag-weekday-ingestion
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 14 TiB
-    % of operating budget: 90.3%   % of limit: 72.2%
+    headroom: 19.6 TiB
+    % of operating budget: 88.4%   % of limit: 70.8%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 14 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -5038,17 +5038,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -13 TiB
-    % of operating budget: 109.0%   % of limit: 87.2%
+    headroom: -10.4 TiB
+    % of operating budget: 106.1%   % of limit: 84.9%
     Finding R-GRO-1: Projected capacity at the 1-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 144 TiB budget; headroom -13 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 180 TiB vs 169.6 TiB budget; headroom -10.4 TiB.
       implication: Growth projection exceeds the capacity operating budget within 1 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -5067,15 +5067,15 @@ Infrastructure: INF-B   Workload: WL-RAG   Sample: rag-weekday-batch-offhours
 Options: demand multiplier 1x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 14 TiB
-    % of operating budget: 90.3%   % of limit: 72.2%
+    headroom: 19.6 TiB
+    % of operating budget: 88.4%   % of limit: 70.8%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 14 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -5182,17 +5182,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -13 TiB
-    % of operating budget: 109.0%   % of limit: 87.2%
+    headroom: -10.4 TiB
+    % of operating budget: 106.1%   % of limit: 84.9%
     Finding R-GRO-1: Projected capacity at the 1-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 144 TiB budget; headroom -13 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 180 TiB vs 169.6 TiB budget; headroom -10.4 TiB.
       implication: Growth projection exceeds the capacity operating budget within 1 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -5213,15 +5213,15 @@ Infrastructure: INF-B   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 1.5x, horizon 0 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 14 TiB
-    % of operating budget: 90.3%   % of limit: 72.2%
+    headroom: 19.6 TiB
+    % of operating budget: 88.4%   % of limit: 70.8%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 14 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -5328,17 +5328,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 14 TiB
-    % of operating budget: 90.3%   % of limit: 72.2%
+    headroom: 19.6 TiB
+    % of operating budget: 88.4%   % of limit: 70.8%
     Finding R-GRO-1: Projected capacity at the 0-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 0 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^0 + 30 TiB × (1 + 0.4)^0 = 130 TiB vs 144 TiB budget; headroom 14 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^0 + 30 TiB × (1 + 0.4)^0 = 150 TiB vs 169.6 TiB budget; headroom 19.6 TiB.
       implication: The modeled environment retains capacity headroom at the 0-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -5357,15 +5357,15 @@ Infrastructure: INF-B   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 1.5x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 14 TiB
-    % of operating budget: 90.3%   % of limit: 72.2%
+    headroom: 19.6 TiB
+    % of operating budget: 88.4%   % of limit: 70.8%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 14 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -5472,17 +5472,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -13 TiB
-    % of operating budget: 109.0%   % of limit: 87.2%
+    headroom: -10.4 TiB
+    % of operating budget: 106.1%   % of limit: 84.9%
     Finding R-GRO-1: Projected capacity at the 1-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 144 TiB budget; headroom -13 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 180 TiB vs 169.6 TiB budget; headroom -10.4 TiB.
       implication: Growth projection exceeds the capacity operating budget within 1 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -5501,15 +5501,15 @@ Infrastructure: INF-B   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 1.5x, horizon 3 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 14 TiB
-    % of operating budget: 90.3%   % of limit: 72.2%
+    headroom: 19.6 TiB
+    % of operating budget: 88.4%   % of limit: 70.8%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 14 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -5616,17 +5616,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -90.41 TiB
-    % of operating budget: 162.8%   % of limit: 130.2%
+    headroom: -95.22 TiB
+    % of operating budget: 156.1%   % of limit: 124.9%
     Finding R-GRO-1: Projected capacity at the 3-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 3 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^3 + 30 TiB × (1 + 0.4)^3 = 234.41 TiB vs 144 TiB budget; headroom -90.41 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^3 + 30 TiB × (1 + 0.4)^3 = 264.82 TiB vs 169.6 TiB budget; headroom -95.22 TiB.
       implication: Growth projection exceeds the capacity operating budget within 3 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -5645,15 +5645,15 @@ Infrastructure: INF-B   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 2x, horizon 0 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 14 TiB
-    % of operating budget: 90.3%   % of limit: 72.2%
+    headroom: 19.6 TiB
+    % of operating budget: 88.4%   % of limit: 70.8%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 14 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -5760,17 +5760,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-ready
   Check growth: modeled-ready
-    headroom: 14 TiB
-    % of operating budget: 90.3%   % of limit: 72.2%
+    headroom: 19.6 TiB
+    % of operating budget: 88.4%   % of limit: 70.8%
     Finding R-GRO-1: Projected capacity at the 0-year horizon is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 0 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^0 + 30 TiB × (1 + 0.4)^0 = 130 TiB vs 144 TiB budget; headroom 14 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^0 + 30 TiB × (1 + 0.4)^0 = 150 TiB vs 169.6 TiB budget; headroom 19.6 TiB.
       implication: The modeled environment retains capacity headroom at the 0-year planning horizon.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -5789,15 +5789,15 @@ Infrastructure: INF-B   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 2x, horizon 1 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 14 TiB
-    % of operating budget: 90.3%   % of limit: 72.2%
+    headroom: 19.6 TiB
+    % of operating budget: 88.4%   % of limit: 70.8%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 14 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -5904,17 +5904,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -13 TiB
-    % of operating budget: 109.0%   % of limit: 87.2%
+    headroom: -10.4 TiB
+    % of operating budget: 106.1%   % of limit: 84.9%
     Finding R-GRO-1: Projected capacity at the 1-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 1 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 157 TiB vs 144 TiB budget; headroom -13 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^1 + 30 TiB × (1 + 0.4)^1 = 180 TiB vs 169.6 TiB budget; headroom -10.4 TiB.
       implication: Growth projection exceeds the capacity operating budget within 1 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.
@@ -5933,15 +5933,15 @@ Infrastructure: INF-B   Workload: WL-RAG   Sample: rag-weekday-burst-query
 Options: demand multiplier 2x, horizon 3 year(s)
 Dimension capacity: modeled-ready
   Check capacity: modeled-ready
-    headroom: 14 TiB
-    % of operating budget: 90.3%   % of limit: 72.2%
+    headroom: 19.6 TiB
+    % of operating budget: 88.4%   % of limit: 70.8%
     Finding R-CAP-1: Combined used plus proposed capacity is within the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-        - usable capacity limit: 197912092999680 bytes (basis: synthetic infrastructure profile)
-      calculation: 100 TiB used + 30 TiB proposed = 130 TiB combined vs 144 TiB budget (0.8 × 180 TiB usable); headroom 14 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+        - usable capacity limit: 233096465088512 bytes (basis: synthetic infrastructure profile)
+      calculation: 120 TiB used + 30 TiB proposed = 150 TiB combined vs 169.6 TiB budget (0.8 × 212 TiB usable); headroom 19.6 TiB.
       implication: Modeled capacity headroom exists for the proposed workload at the declared synthetic values.
       next investigation: Confirm real usable capacity and current consumption before relying on this result.
       confidence: high — Arithmetic comparison on complete declared inputs; synthetic values are not validated against a real array.
@@ -6048,17 +6048,17 @@ Dimension protection: modeled-ready
         - Replication is not equated with backup; availability is not inferred from a single feature.
 Dimension growth: modeled-constraint
   Check growth: modeled-constraint
-    headroom: -90.41 TiB
-    % of operating budget: 162.8%   % of limit: 130.2%
+    headroom: -95.22 TiB
+    % of operating budget: 156.1%   % of limit: 124.9%
     Finding R-GRO-1: Projected capacity at the 3-year horizon exceeds the capacity operating budget.
       evidence:
-        - existing used capacity: 109951162777600 bytes (basis: aligned demand sample)
+        - existing used capacity: 131941395333120 bytes (basis: aligned demand sample)
         - existing annual growth fraction: 0.15 fraction (basis: synthetic infrastructure profile)
         - proposed workload capacity: 32985348833280 bytes (basis: synthetic workload profile)
         - proposed annual growth fraction: 0.4 fraction (basis: synthetic workload profile)
         - planning horizon: 3 years (basis: assessment option)
-        - capacity operating budget: 158329674399744 bytes (basis: 0.8 × usable capacity)
-      calculation: projected = 100 TiB × (1 + 0.15)^3 + 30 TiB × (1 + 0.4)^3 = 234.41 TiB vs 144 TiB budget; headroom -90.41 TiB.
+        - capacity operating budget: 186477172070809.62 bytes (basis: 0.8 × usable capacity)
+      calculation: projected = 120 TiB × (1 + 0.15)^3 + 30 TiB × (1 + 0.4)^3 = 264.82 TiB vs 169.6 TiB budget; headroom -95.22 TiB.
       implication: Growth projection exceeds the capacity operating budget within 3 year(s); capacity expansion timing becomes a planning constraint.
       next investigation: Validate the declared growth fractions against observed consumption trends; compound growth dominates at longer horizons.
       confidence: high — Deterministic compound-growth arithmetic on declared synthetic inputs; growth rates themselves are assumptions.

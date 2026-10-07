@@ -50,3 +50,14 @@ Source: `docs/devin-initial-review.md` §5 and §5.1; profiles in `docs/syntheti
 - Stack: React, TypeScript, Vitest, Playwright.
 - Repository: the extracted handoff folder becomes the local repository; GitHub remote decided later.
 - Milestone scoping: M1 verifies individual aligned demand samples only; weekly statistics, exceedance duration, day selection and the full four-combination assessment belong to M2.
+
+## Environment profile resolutions (Chuck, October 7, 2026)
+
+Source: `docs/environment-profile-proposal.md` §8 (accepted 0.2). Applied in milestone M2.
+
+- ENV-1 accepted: fictional vendor-neutral midrange all-flash array; 7.68 TB (decimal) NVMe drives = 6.985 TiB; 48-slot enclosure declared as an assumption, not a researched physical design; 2 global spares; 5 % metadata/reserve; Variant A RAID 5 = 5 × (8+1), 47 populated drives; Variant B RAID 6 = 4 × (8+2), 42 populated drives. The variants are distinct drive populations, not identical hardware.
+- ENV-2 accepted: declared usable 265 TiB (A) / 212 TiB (B), rounded down from 265.43 / 212.34; used 120 TiB at trace start; 80 % budgets 212.0 / 169.6 TiB.
+- ENV-3 decided against the recommendation: both variants keep 250,000 backend ops/s as independently declared synthetic limits. Drive count alone does not establish sustainable array performance; scaling by 40/45 would have introduced an unvalidated performance relationship. The draft's "equal limits are physically incoherent" assertion is withdrawn.
+- ENV-4 accepted: front-end limits 150,000 IOPS / 3,000 MiB/s for both variants (controller-bound, declared).
+- ENV-5 accepted: descriptive `environment` block in each infrastructure profile, with validation of group counts, data/parity/spare totals, slot limits, decimal/binary conversion, reserve arithmetic and declared usable capacity. No environment field participates in a performance rule.
+- Expected outputs are recalculated from the new values; historical M1 numbers are not preserved.
