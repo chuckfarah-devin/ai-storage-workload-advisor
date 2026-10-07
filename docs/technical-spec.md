@@ -2,7 +2,7 @@
 ## Technical Specification — proposed 0.2
 
 Depends on Business/Product Specification 0.3. This is a design document; milestone M1 implements the static engine described in §Assessment rules and §Backend, and later milestones implement the rest.  
-Version history: 0.1 reviewed baseline (October 6, 2026); 0.2 first-review edits E-3, E-4, E-5, E-6, E-9, E-10, E-11, E-12, E-13, E-15, E-16 applied per DECISIONS.md resolutions (October 6, 2026); 0.2.1 sample-set selection semantics (R-SET-1); 0.3 environment block (ENV-1…ENV-5) and M2 trace engine implementation notes (October 6, 2026). Requirement/rule identifiers R-* are defined in docs/devin-initial-review.md §6.1 and docs/tests.md.
+Version history: 0.1 reviewed baseline (October 6, 2026); 0.2 first-review edits E-3, E-4, E-5, E-6, E-9, E-10, E-11, E-12, E-13, E-15, E-16 applied per DECISIONS.md resolutions (October 6, 2026); 0.2.1 sample-set selection semantics (R-SET-1); 0.3 environment block (ENV-1…ENV-5) and M2 trace engine implementation notes (October 6, 2026); 0.3.1 M3 UI contract notes (October 7, 2026). Requirement/rule identifiers R-* are defined in docs/devin-initial-review.md §6.1 and docs/tests.md.
 
 ### Architecture
 
@@ -44,6 +44,8 @@ M2 implementation notes (implemented; ruleset 1.0.0-m2):
 - Per-minute derivation reuses the scalar rules: front-end IOPS and throughput combine existing plus proposed demand; backend operations reuse the RAID 5/6 read/write split. The demand multiplier scales proposed demand on every minute before derivation; the horizon drives the growth projection exactly as in M1.
 - Each numeric check (capacity, front-end IOPS, backend ops, throughput) selects its own driving minute — the valid computable minute with the highest budget utilization, earliest on tie — and submits that minute as an aligned sample to the scalar rules, so check evidence stays aligned to its driving minute (no combined fictional peak). When the backend is uncomputable but never observed exceeding, the earliest unknown minute drives a needs-investigation result. Below-100% coverage downgrades a would-be ready check to needs-investigation with a coverage missingReason; an observed constraint stands.
 - Weekly latency evidence is derived from the baseline schedule's latency fields (plateau `latencyMs` or ramp `latencyStartMs`/`latencyEndMs`); the shipped baseline yields P90 0.9 ms, P95 1.2 ms, max 1.4 ms. Post-addition latency remains needs-investigation — no response curve exists.
+
+M3 interface notes (implemented): the UI reads engine outputs only — a pure view-model layer (`src/ui/viewModel.ts`) produces every displayed number; components never run engine arithmetic. When a check has no usable demand evidence in the trace, it reports the unknown contract (needs-investigation, null headroom and utilization, 'cannot be modeled' wording) rather than evaluating a fabricated zero-demand sample; coverage below 100% replaces — not appends to — any contradictory ready wording while retaining real observed headroom. Charts display decimal rate units (MB/s below 10⁹ B/s, GB/s at or above, one unit per chart chosen from demand plus budget and ceiling); value cards keep binary units with explicit MiB/s or TiB labels — MiB is never relabeled as MB.
 
 ### Assessment rules
 

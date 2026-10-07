@@ -23,17 +23,23 @@ Supporting: [DECISIONS.md](DECISIONS.md) (decision record), [docs/synthetic-prof
 
 ## Status
 
-**Milestones M0, M1, and M2 complete; M3–M4 not started.** M1 implements scalar assessment rules over single aligned demand samples; M2 adds the deterministic 10,080-minute weekly trace, aggregation, weekly statistics, default-day selection, and trace assessment (ruleset 1.0.0-m2). UI and browser verification are not yet implemented.
+**Milestones M0–M3 complete; M4 (browser verification) not started.** M1 implements scalar assessment rules over single aligned demand samples; M2 adds the deterministic 10,080-minute weekly trace, aggregation, weekly statistics, default-day selection, and trace assessment (ruleset 1.0.0-m2); M3 adds the React interface (view-model layer, charts, findings, exports) reading engine output only. Playwright/browser verification is not yet implemented.
 
 ## How to run
 
 ```sh
 npm install
-npm test            # Vitest engine suite (tests/engine)
-npm run golden      # regenerate tests/golden/*.json and docs/verification/m1/golden-assessments.md
+npm run dev       # UI at http://localhost:5173/
+npm run build     # production build into dist/
+```
+
+## Engine checks
+
+```sh
+npm test            # Vitest suite (tests/engine + tests/ui)
+npm run golden      # regenerate tests/golden/*.json, tests/golden/m2/, docs/verification outputs
 npm run typecheck   # tsc --noEmit over src, tests, scripts
 npm run lint        # oxlint
-npm run dev         # Vite dev server (placeholder UI only)
 ```
 
 ## Layout
@@ -41,9 +47,10 @@ npm run dev         # Vite dev server (placeholder UI only)
 ```
 data/profiles/     versioned synthetic JSON profiles (INF-A, INF-B, WL-VM, WL-RAG, existing baseline)
 src/engine/        pure TypeScript assessment engine (zero DOM imports)
-src/               Vite + React app shell (interface arrives in M3)
-tests/engine/      Vitest suites; filenames carry requirement IDs (R-*)
-tests/golden/      committed per-sample assessment fixtures
+src/ui/            React view-model (src/ui/viewModel.ts) and components — render engine output only
+tests/engine/      Vitest engine suites; filenames carry requirement IDs (R-*)
+tests/ui/          Vitest view-model and component smoke tests
+tests/golden/      committed per-sample and trace assessment fixtures
 scripts/golden.ts  regenerates golden fixtures and the verification document
 docs/handoff/      original handoff files (historical)
 docs/verification/ verification artifacts produced by actual runs

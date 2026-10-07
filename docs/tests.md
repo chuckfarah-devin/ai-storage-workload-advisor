@@ -52,11 +52,18 @@ Requirement IDs are defined in `docs/devin-initial-review.md` §6.1.
 | R-REP-1 | Derived weekly latency/capacity, rendered weekly block, ruleset version | `tests/engine/r-rep-1.test.ts` |
 | Golden M2 | TraceAssessment (m=1, h=1) + Monday 10:00–10:39 buckets equal committed fixtures | `tests/engine/golden-m2.test.ts`, `tests/golden/m2/*.json` |
 
+## Requirement-to-test map — M3 (implemented)
+
+| Req ID | Requirement | Test file(s) |
+|---|---|---|
+| R-UI-1 | View model: rate-unit selection (decimal MB/s–GB/s, one unit per chart incl. budget/ceiling), schedule-derived presets with explained absence, export bundle fields, what-if bundle, all-combination assess | `tests/ui/viewModel.test.ts` |
+| R-UI-2 | Component smoke: label, banner status, workload/what-if switching, hidden-burst readout, preset note, no predicted-latency claims, preview controls don't alter assessment | `tests/ui/App.test.tsx` |
+| — | Zero-coverage contract and coverage-downgrade wording (Part A engine fix) | `tests/engine/r-ts-7-coverage.test.ts` |
+
 ## Not yet implemented
 
 | Req ID | Milestone |
 |---|---|
-| R-UI-1, R-UI-2 (UI, charts) | M3/M4 |
 | R-UI-3 (narrow screen), R-UI-4 (no vendor claims) | M4 |
 
 ## Last executed results
@@ -64,8 +71,8 @@ Requirement IDs are defined in `docs/devin-initial-review.md` §6.1.
 `npm test` (vitest run), executed October 6, 2026:
 
 ```
-Test Files  30 passed (30)
-     Tests  150 passed (150)
+Test Files  32 passed (32)
+     Tests  171 passed (171)
 ```
 
 `npm run typecheck` — 0 errors. `npm run lint` (oxlint) — 0 warnings, 0 errors.

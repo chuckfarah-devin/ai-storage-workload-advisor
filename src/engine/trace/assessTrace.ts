@@ -77,6 +77,50 @@ function makeSample(
   };
 }
 
+const RULE_IDS: Record<string, string> = {
+  capacity: 'R-CAP-1',
+  'iops.frontend': 'R-FE-1',
+  'iops.backend': 'R-BE-3',
+  throughput: 'R-THR-1',
+  growth: 'R-GRO-1',
+};
+
+/** Check for a resource with no usable demand evidence. No fabricated
+ *  zero-demand sample: unknown is not zero and is not ready. Weekly evidence
+ *  (null-valued) is appended by the caller's shared weekly-evidence pass. */
+function unknownCheck(checkId: string, cov: Coverage): CheckResult {
+  return {
+    id: checkId,
+    status: 'needs-investigation',
+    headroom: null,
+    budgetUtilization: null,
+    limitUtilization: null,
+    findings: [
+      {
+        ruleId: RULE_IDS[checkId] ?? checkId,
+        condition: 'No usable demand evidence exists in the trace for this check.',
+        evidence: [
+          {
+            label: 'valid trace minutes',
+            value: cov.valid,
+            unit: 'minutes',
+            basis: `${cov.valid}/${cov.total} observed`,
+            missingReason: 'no valid minute carries demand for this check',
+          },
+        ],
+        calculation: 'not computable — no valid minutes',
+        implication:
+          'Readiness cannot be modeled from this trace; the missing interval could contain demand above budget.',
+        nextInvestigation:
+          'Supply a trace with observed demand for the period before interpreting any headroom.',
+        confidence: 'insufficient',
+        confidenceRationale: 'No evidence; unknown is not ready.',
+        assumptions: [],
+      },
+    ],
+  };
+}
+
 function weeklyEvidence(prefix: string, unit: string, s: WeeklySummary, ex: Exceedance, cov: Coverage): Evidence[] {
   return [
     { label: `${prefix} weekly mean`, value: s.mean, unit, basis: 'duration-weighted mean over valid minutes' },
@@ -201,7 +245,8 @@ export function assessTrace(
     // No computable/exceeding minute (incl. missing backend limit): the
     // earliest valid minute drives so the M1 rule reports its own
     // "limit missing" needs-investigation.
-    beIdx = trace.records.findIndex((r) => !r.missing);
+    const firstValid = trace.records.findIndex((r) => !r.missing);
+    beIdx = firstValid === -1 ? null : firstValid;
   }
   const capIdx = capSeries.reduce<number | null>(
     (best, v, i) =>
@@ -233,40 +278,40 @@ export function assessTrace(
     throw new Error(`check ${checkId} not found`);
   };
 
-  const checks: Record<string, { check: CheckResult; drivingIdx: number | null }> = {
-    capacity: { check: runCheck('capacity', sampleFor(capIdx, 'capacity')), drivingIdx: capIdx },
-    'iops.frontend': { check: runCheck('iops.frontend', sampleFor(feIdx, 'iops.frontend')), drivingIdx: feIdx },
-    'iops.backend': { check: runCheck('iops.backend', sampleFor(beIdx, 'iops.backend')), drivingIdx: beIdx },
-    throughput: { check: runCheck('throughput', sampleFor(thrIdx, 'throughput')), drivingIdx: thrIdx },
-    latency: { check: runCheck('latency', sampleFor(capIdx ?? feIdx, 'latency')), drivingIdx: null },
-    protection: { check: runCheck('protection', sampleFor(capIdx ?? feIdx, 'protection')), drivingIdx: null },
-    growth: { check: runCheck('growth', sampleFor(capIdx, 'growth')), drivingIdx: capIdx },
-  };
-
   // Weekly evidence + coverage policy. Incomplete coverage prevents a ready
   // result for coverage-driven checks; an observed constraint stands.
+  const maxUsedEvidence: Evidence[] = [
+    {
+      label: 'maximum used capacity over trace',
+      value: maxUsed,
+      unit: 'bytes',
+      basis: 'maximum usedCapacityBytes over valid trace minutes (E-5)',
+    },
+  ];
   const weeklyFor: Record<string, Evidence[]> = {
     'iops.frontend': weeklyEvidence('front-end IOPS', 'IOPS', feW.summary, feW.exceedance, cov),
     'iops.backend': weeklyEvidence('backend operations', 'ops/s', beW.summary, beW.exceedance, cov).concat([
       { label: 'backend unknown minutes', value: beW.unknownMinutes, unit: 'minutes', basis: 'minutes where the backend estimate is unknown' },
     ]),
     throughput: weeklyEvidence('throughput', 'bytes/second', thrW.summary, thrW.exceedance, cov),
-    capacity: [
-      {
-        label: 'maximum used capacity over trace',
-        value: maxUsed,
-        unit: 'bytes',
-        basis: 'maximum usedCapacityBytes over valid trace minutes (E-5)',
-      },
-    ],
-    growth: [
-      {
-        label: 'maximum used capacity over trace',
-        value: maxUsed,
-        unit: 'bytes',
-        basis: 'maximum usedCapacityBytes over valid trace minutes (E-5)',
-      },
-    ],
+    capacity: maxUsedEvidence,
+    growth: maxUsedEvidence,
+  };
+
+  // A check with no driving minute has no usable demand evidence: return the
+  // unknown contract instead of a fabricated zero-demand sample.
+  const numeric = (id: string, idx: number | null, label: string) => ({
+    check: idx === null ? unknownCheck(id, cov) : runCheck(id, sampleFor(idx, label)),
+    drivingIdx: idx,
+  });
+  const checks: Record<string, { check: CheckResult; drivingIdx: number | null }> = {
+    capacity: numeric('capacity', capIdx, 'capacity'),
+    'iops.frontend': numeric('iops.frontend', feIdx, 'iops.frontend'),
+    'iops.backend': numeric('iops.backend', beIdx, 'iops.backend'),
+    throughput: numeric('throughput', thrIdx, 'throughput'),
+    latency: { check: runCheck('latency', sampleFor(capIdx ?? feIdx, 'latency')), drivingIdx: null },
+    protection: { check: runCheck('protection', sampleFor(capIdx ?? feIdx, 'protection')), drivingIdx: null },
+    growth: numeric('growth', capIdx, 'growth'),
   };
   const coverageDriven = new Set(['capacity', 'iops.frontend', 'iops.backend', 'throughput', 'growth', 'latency']);
 
@@ -279,15 +324,23 @@ export function assessTrace(
     if (cov.fraction < 1 && c.status === 'modeled-ready' && coverageDriven.has(id)) {
       c.status = 'needs-investigation';
       if (c.findings.length > 0) {
-        c.findings[0].evidence.push({
+        const f = c.findings[0];
+        f.evidence.push({
           label: 'coverage downgrade',
           value: cov.fraction,
           unit: 'fraction',
           basis: 'weekly trace coverage',
           missingReason: `coverage ${cov.valid}/${cov.total} is below 100%; a ready result requires complete evidence`,
         });
-        c.findings[0].condition += ` Downgraded: coverage ${cov.valid}/${cov.total} is below 100%.`;
-        c.findings[0].confidence = 'insufficient';
+        // Replace — not append — contradictory ready wording: the observed
+        // headroom stays real, but readiness cannot be concluded from a
+        // partial trace.
+        f.condition = `${f.condition} Coverage ${cov.valid}/${cov.total} minutes is incomplete.`;
+        f.implication =
+          'Within-budget evidence covers only the observed minutes; the unobserved interval could contain demand above budget, so readiness cannot be established.';
+        f.confidence = 'insufficient';
+        f.confidenceRationale =
+          'Complete inputs within observed minutes, but trace coverage is incomplete.';
       }
     }
     finalChecks[id] = c;
