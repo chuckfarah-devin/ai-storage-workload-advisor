@@ -33,16 +33,29 @@ Requirement IDs are defined in `docs/devin-initial-review.md` §6.1.
 | R-SET-1 | Sample-set selection: precedence tiers, highest budget utilization within numeric tiers, earliest-at-status for non-numeric/unknown, aligned evidence retained | `tests/engine/r-set-1-sample-set-selection.test.ts` |
 | R-WHAT-1 | Multipliers apply to proposed IOPS/throughput/backend, not capacity | `tests/engine/r-what-1-whatif.test.ts` |
 | R-FIND-1 | Every finding has rule ID, inputs, calculation, implication, next investigation, confidence, assumptions | `tests/engine/r-find-1-findings.test.ts` |
+| R-ENV-1 | Environment block coherence: drive arithmetic, slots, parity widths, raw bytes, usable bound, reserve range | `tests/engine/r-env-1-environment.test.ts` |
 | Golden | Per-sample assessments for all combos equal committed fixtures | `tests/engine/golden.test.ts`, `tests/fixtures/samples.ts`, `tests/golden/*.json` |
+
+## Requirement-to-test map — M2 (implemented)
+
+| Req ID | Requirement | Test file(s) |
+|---|---|---|
+| R-TS-1 | 10,080 records, strictly increasing 60 s UTC timestamps, cyclic schedule coverage, day extraction, 1,008 buckets, full coverage, determinism | `tests/engine/r-ts-1-generation.test.ts` |
+| R-TS-2 | WL-VM × INF-B weekly values, hidden-burst buckets, statuses, default day | `tests/engine/r-ts-2-vm-infb.test.ts` |
+| R-TS-3 | WL-VM × INF-A weekly values and utilization-based day selection | `tests/engine/r-ts-3-vm-infa.test.ts` |
+| R-TS-4 | WL-RAG × INF-A unknown backend minutes preserved, earliest-unknown driving minute | `tests/engine/r-ts-4-rag-infa.test.ts` |
+| R-TS-5 | WL-RAG × INF-B constraint with unknown minutes still reported | `tests/engine/r-ts-5-rag-infb.test.ts` |
+| R-TS-6 | Noncoincident peaks: each check keeps its own driving minute | `tests/engine/r-ts-6-driving-minutes.test.ts` |
+| R-TS-7 | Missing minutes: coverage fraction, removed exceedances, ready-downgrade | `tests/engine/r-ts-7-coverage.test.ts` |
+| R-DAY-1 | Default-day selection rules and reason strings | `tests/engine/r-day-1.test.ts` |
+| R-WHAT-2 | Trace what-if: multiplier scales series and driving-minute checks identically; capacity unaffected; null backend limit → unknown all week | `tests/engine/r-what-2-trace-whatif.test.ts` |
+| R-REP-1 | Derived weekly latency/capacity, rendered weekly block, ruleset version | `tests/engine/r-rep-1.test.ts` |
+| Golden M2 | TraceAssessment (m=1, h=1) + Monday 10:00–10:39 buckets equal committed fixtures | `tests/engine/golden-m2.test.ts`, `tests/golden/m2/*.json` |
 
 ## Not yet implemented
 
 | Req ID | Milestone |
 |---|---|
-| R-TS-1 … R-TS-7 (trace, buckets, percentiles, exceedance, noncoincident peaks, coverage) | M2 |
-| R-DAY-1 (default day selection) | M2 |
-| R-REP-1 (reproducibility) | M2 |
-| R-BE-4 trace-level case | M2 |
 | R-UI-1, R-UI-2 (UI, charts) | M3/M4 |
 | R-UI-3 (narrow screen), R-UI-4 (no vendor claims) | M4 |
 
@@ -51,9 +64,9 @@ Requirement IDs are defined in `docs/devin-initial-review.md` §6.1.
 `npm test` (vitest run), executed October 6, 2026:
 
 ```
-Test Files  18 passed (18)
-     Tests  100 passed (100)
-  Duration  ~1s
+Test Files  30 passed (30)
+     Tests  150 passed (150)
 ```
 
-`npm run typecheck` — 0 errors. `npm run lint` (oxlint) — 0 warnings, 0 errors, 39 files.
+`npm run typecheck` — 0 errors. `npm run lint` (oxlint) — 0 warnings, 0 errors.
+`npm run golden` — regenerated `tests/golden/` M1 fixtures (capacity/growth-only diff after ENV-1…ENV-5), `tests/golden/m2/*.json` (4 files), and `docs/verification/m2/weekly-summaries.md`; both golden tests confirm reproduction.

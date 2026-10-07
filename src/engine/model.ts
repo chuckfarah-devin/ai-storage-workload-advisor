@@ -20,6 +20,24 @@ export interface Evidence {
   missingReason?: string;
 }
 
+/** Descriptive physical-environment block (ENV-5). No field participates in any rule. */
+export interface Environment {
+  architecture: string;
+  enclosureSlots: number;
+  driveCount: number;
+  spareDrives: number;
+  groupCount: number;
+  dataWidth: number;
+  parityWidth: number;
+  mediaType: string;
+  driveNominalBytesDecimal: number;
+  driveNominalTBDecimal: number;
+  rawBytesDecimal: number;
+  metadataReserveFraction: number;
+  hostPorts: string;
+  note: string;
+}
+
 export interface InfrastructureProfile {
   id: string;
   schemaVersion: string;
@@ -59,6 +77,7 @@ export interface InfrastructureProfile {
     maxMs: number | null;
     basis: string;
   };
+  environment?: Environment;
 }
 
 export interface ScheduleRow {
@@ -69,6 +88,11 @@ export interface ScheduleRow {
   iops?: number;
   iopsStart?: number;
   iopsEnd?: number;
+  /** baseline latency plateau (ms) — existing-baseline schedule only */
+  latencyMs?: number;
+  /** ramp variant: interpolate latencyStartMs → latencyEndMs over the window */
+  latencyStartMs?: number;
+  latencyEndMs?: number;
   readFraction: number;
   readBlockBytes: number;
   writeBlockBytes: number;
@@ -159,6 +183,8 @@ export interface CheckResult {
   selectionBasis?: 'highest-budget-utilization' | 'earliest-at-status';
   /** Set by assessSampleSet: all sample ids at the winning status tier, input order. */
   tierSampleIds?: string[];
+  /** Set by assessTrace: trace minute index whose evidence this check retains. */
+  drivingMinuteIndex?: number;
 }
 
 export type Dimension = 'capacity' | 'iops' | 'throughput' | 'latency' | 'protection' | 'growth';

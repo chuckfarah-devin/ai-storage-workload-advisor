@@ -223,6 +223,7 @@ Requirement IDs are proposed here so tests can reference them; they should be co
 | R-PRO-1 | Capability matching; unknown → investigation; shortfall → constraint (tech §Rules, D-5) | M1 | 2-failure requirement vs RAID 5; replication unknown vs none-required; snapshots missing |
 | R-STAT-1 | Precedence constraint > unknown > ready at sub-check, dimension and overall level (tech §Rules) | M1 | truth-table test |
 | R-SET-1 | Sample-set selection: precedence tiers, highest budget utilization within numeric tiers, earliest-at-status for non-numeric/unknown, aligned evidence retained | M1 | r-set-1-sample-set-selection.test.ts |
+| R-ENV-1 | Environment block coherence validation: drive arithmetic, slot bound, parity-width match, raw-bytes and usable-capacity bounds, reserve range | M2 | r-env-1-environment.test.ts |
 | R-WHAT-1 | Multipliers 1/1.5/2 apply to proposed IOPS, throughput, backend; not capacity (E-6) | M1 | RAG 2× FE constraint; capacity unchanged |
 | R-FIND-1 | Every finding has rule ID, inputs, calculation, implication, next investigation, confidence, assumptions (tech §Findings) | M1 | schema test over all findings from the four combinations |
 | R-TS-1 | Exactly 10,080 minute records, aligned UTC timestamps, fixed days (tech §Time-series) | M2 | count and timestamp monotonicity |

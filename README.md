@@ -23,7 +23,7 @@ Supporting: [DECISIONS.md](DECISIONS.md) (decision record), [docs/synthetic-prof
 
 ## Status
 
-**Milestones M0 and M1 complete (static engine); M2–M4 not started.** M1 implements scalar assessment rules over single aligned demand samples; trace generation, weekly statistics, UI, and browser verification are not yet implemented.
+**Milestones M0, M1, and M2 complete; M3–M4 not started.** M1 implements scalar assessment rules over single aligned demand samples; M2 adds the deterministic 10,080-minute weekly trace, aggregation, weekly statistics, default-day selection, and trace assessment (ruleset 1.0.0-m2). UI and browser verification are not yet implemented.
 
 ## How to run
 

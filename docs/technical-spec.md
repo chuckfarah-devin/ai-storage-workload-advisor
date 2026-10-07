@@ -2,7 +2,7 @@
 ## Technical Specification — proposed 0.2
 
 Depends on Business/Product Specification 0.3. This is a design document; milestone M1 implements the static engine described in §Assessment rules and §Backend, and later milestones implement the rest.  
-Version history: 0.1 reviewed baseline (October 6, 2026); 0.2 first-review edits E-3, E-4, E-5, E-6, E-9, E-10, E-11, E-12, E-13, E-15, E-16 applied per DECISIONS.md resolutions (October 6, 2026); 0.2.1 sample-set selection semantics (R-SET-1). Requirement/rule identifiers R-* are defined in docs/devin-initial-review.md §6.1 and docs/tests.md.
+Version history: 0.1 reviewed baseline (October 6, 2026); 0.2 first-review edits E-3, E-4, E-5, E-6, E-9, E-10, E-11, E-12, E-13, E-15, E-16 applied per DECISIONS.md resolutions (October 6, 2026); 0.2.1 sample-set selection semantics (R-SET-1); 0.3 environment block (ENV-1…ENV-5) and M2 trace engine implementation notes (October 6, 2026). Requirement/rule identifiers R-* are defined in docs/devin-initial-review.md §6.1 and docs/tests.md.
 
 ### Architecture
 
@@ -16,6 +16,7 @@ A small browser application with bundled, versioned synthetic data and a determi
 - Aligned demand sample: one timestamp's existing and proposed read IOPS, write IOPS, and read/write block sizes, plus used capacity, baseline latency evidence (P95 and maximum), and declared background backend demand. The static rules operate on one sample; the time-series layer supplies one sample per minute.
 - Evidence: value, unit, basis, assumption reference, and missing-data reason. Unknown is distinct from zero. Utilization percentages are derived, not additional demand.
 - Assessment: ruleset version, profile identifiers, scenario inputs, six dimension results, findings, overall status, and baseline/what-if deltas.
+- Environment (optional, descriptive; added in M2): enclosure slots, drive count, spare drives, protection-group count, data/parity width, media type, nominal drive capacity, raw decimal bytes, metadata reserve fraction, host ports, and free-text notes. The block records the declared hardware population behind each infrastructure profile — the two variants deliberately share equal declared performance limits while carrying distinct drive populations (see docs/environment-profile-proposal.md). Validation checks internal coherence (drive count = groups × width + spares, slots bound, raw-bytes arithmetic, usable-capacity bound after reserve); no assessment rule reads it.
 
 Use usable capacity after protection overhead. All performance quantities use aligned sustained-demand windows; do not combine unrelated peaks. Canonical units are bytes, seconds, IOPS, and milliseconds; display capacity as TiB and throughput as MiB/s with explicit labels.
 
@@ -34,6 +35,15 @@ Performance checks use the aligned minute demands against the approved budgets; 
 Default detail day: the earliest day containing the longest continuous exceedance across modeled performance resources; a run that crosses midnight belongs to the day containing its first minute, and equal-length runs resolve to the earliest start. If none exceed, the day containing the earliest minute that achieves the week's highest budget-utilization ratio (demand ÷ budget, per resource, per minute). State the selection reason and allow another fixed day to be selected. This targets troubleshooting and is not an unbiased sample of the whole week.
 
 Additional verification: exact record counts, aligned timestamps, rate aggregation, percentile definition, a short burst hidden by a ten-minute mean, noncoincident peaks, missing coverage, and reproducible day selection. Validate frontend response with the small trace before considering storage or downsampling changes.
+
+M2 implementation notes (implemented; ruleset 1.0.0-m2):
+
+- The week is cyclic and starts Monday 2026-10-05T00:00:00Z. Schedule rows apply to `daily`, `weekday`, `weekend`, or named days (`mon`…`sun`); a row whose end precedes its start spans midnight into the following day (Sunday wraps to Monday). Minutes use interval-start semantics.
+- Overlap resolution: most specific wins — named day > weekday/weekend > daily; then the shorter window (this is how the 10-minute burst rows overlay the business row); a tie on both is a validation error naming the rows. Every minute of the week must resolve to exactly one row; the shipped schedules are coverage-validated.
+- Ramp rows interpolate linearly: value at offset m of a window of length L is `start + (end − start) × m / L`, so the first minute equals `iopsStart` and `iopsEnd` itself belongs to the next row. Baseline latency fields interpolate identically.
+- Per-minute derivation reuses the scalar rules: front-end IOPS and throughput combine existing plus proposed demand; backend operations reuse the RAID 5/6 read/write split. The demand multiplier scales proposed demand on every minute before derivation; the horizon drives the growth projection exactly as in M1.
+- Each numeric check (capacity, front-end IOPS, backend ops, throughput) selects its own driving minute — the valid computable minute with the highest budget utilization, earliest on tie — and submits that minute as an aligned sample to the scalar rules, so check evidence stays aligned to its driving minute (no combined fictional peak). When the backend is uncomputable but never observed exceeding, the earliest unknown minute drives a needs-investigation result. Below-100% coverage downgrades a would-be ready check to needs-investigation with a coverage missingReason; an observed constraint stands.
+- Weekly latency evidence is derived from the baseline schedule's latency fields (plateau `latencyMs` or ramp `latencyStartMs`/`latencyEndMs`); the shipped baseline yields P90 0.9 ms, P95 1.2 ms, max 1.4 ms. Post-addition latency remains needs-investigation — no response curve exists.
 
 ### Assessment rules
 
