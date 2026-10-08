@@ -1,6 +1,8 @@
 # AI Storage Workload Advisor
 
-Chuck Farah — an enterprise-storage/product leader — directs AI agents through a Specification-Driven Development lifecycle to build this tool. The product question it demonstrates: **"Can my current storage infrastructure support this new workload?"** Given a synthetic infrastructure profile and a proposed workload (VMware/private-cloud expansion or AI/RAG storage demand), the tool assesses readiness across six dimensions — capacity, front-end and backend IOPS, throughput, latency, protection, and growth headroom — and reports each as *modeled ready*, *modeled constraint*, or *needs investigation*, with evidence, calculations, and confidence per finding.
+**Live demo:** https://chuckfarah-devin.github.io/ai-storage-workload-advisor/ — start with the **[three-lesson demo](docs/demo.md)**: front-end headroom can hide backend pressure · weekly averages can hide recurring bursts · unknown evidence should trigger investigation, not a confident answer.
+
+**Chuck Farah** — enterprise-storage/product leader — directs AI-assisted development of this tool through a Specification-Driven Development lifecycle, owning product scope and domain acceptance while AI agents implement and verify each milestone. The product question it demonstrates: **"Can my current storage infrastructure support this new workload?"** Given a synthetic infrastructure profile and a proposed workload (VMware/private-cloud expansion or AI/RAG storage demand), the tool assesses readiness across six dimensions — capacity, front-end and backend IOPS, throughput, latency, protection, and growth headroom — and reports each as *modeled ready*, *modeled constraint*, or *needs investigation*, with evidence, calculations, and confidence per finding.
 
 **Synthetic data. Educational demonstration; not vendor sizing or production configuration guidance.**
 
@@ -34,7 +36,7 @@ Supporting: [DECISIONS.md](DECISIONS.md) (decision record), [docs/synthetic-prof
 ```sh
 npm install
 npm run dev       # UI at http://localhost:5173/
-npm run build     # production build into dist/
+npm run build     # production build into dist/ (GitHub Pages base path /ai-storage-workload-advisor/)
 ```
 
 ## Engine checks
