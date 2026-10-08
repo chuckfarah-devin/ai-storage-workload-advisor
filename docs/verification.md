@@ -129,6 +129,10 @@ Executed October 7, 2026 (post-M4 polish, committed ahead of redeploy):
 
 Changes verified: detail-preset buttons carry `aria-pressed` with a visible selected style (brand border + underline; keyboard focus uses a separate warn-colored outline); exactly one preset is selected and agrees with the displayed window; changing the detail day resets to Full day. A new Workload details expandable renders the RAG deployment assumption (self-hosted vector/search service on volumes backed by the assessed block storage — a scenario choice, not a RAG requirement), the two modeled phases (query-time retrieval vs nightly ingestion/index maintenance), per-phase derived bandwidth (e.g. ingestion 20,000 IOPS × 64 KiB = 1.31 GB/s), and the scope note that GPU inference/token generation/corpus sources are outside the model. No demand values or engine rules changed; goldens unaffected. New screenshot: `m4/screenshots/desktop-workload-details-rag.png`.
 
+### Deployment verification (October 8, 2026)
+
+Commit `17e17e7` built and deployed to GitHub Pages (`gh-pages` `cf5170e`). Post-deploy checks ran against the live site with `node scripts/verify-live.mjs` (Chromium) — all 11 passed: HTTP 200, title, JS bundle `assets/index-DVEmjWRq.js` resolving under the repo base path, Full day `aria-pressed` on load, Morning burst selected style (weight 600, inset brand underline) with exactly one pressed preset, day-change reset to Full day, RAG workload-details deployment/phases/1.31 GB/s text, and no horizontal overflow at 375 px. Live URL: https://chuckfarah-devin.github.io/ai-storage-workload-advisor/
+
 ## Not yet verified
 
 - Nothing outstanding within M0–M4 scope; V2 modeling, real adapters, and live validation remain deferred scope.
