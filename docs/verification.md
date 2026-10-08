@@ -117,6 +117,18 @@ All 10 screenshots were re-generated and re-inspected after these fixes; the rem
 - Screenshots are viewport captures at fixed widths; no print or high-DPI rendering was checked.
 - Keyboard tab-order beyond the sliders and controls was not exhaustively audited.
 
+## V1 polish executed checks
+
+Executed October 7, 2026 (post-M4 polish, committed ahead of redeploy):
+
+| Check | Command | Outcome |
+|---|---|---|
+| Test suite | `npm test` (`vitest run`) | 32 test files, 187 tests, all passed |
+| Type-check / lint | `npm run typecheck` / `npm run lint` | 0 errors / 0 warnings, 0 errors |
+| Playwright e2e | `npm run e2e` (Chromium) | **17 passed, 3 skipped** — same viewport gating; new test `h. workload details…` ran on both projects |
+
+Changes verified: detail-preset buttons carry `aria-pressed` with a visible selected style (brand border + underline; keyboard focus uses a separate warn-colored outline); exactly one preset is selected and agrees with the displayed window; changing the detail day resets to Full day. A new Workload details expandable renders the RAG deployment assumption (self-hosted vector/search service on volumes backed by the assessed block storage — a scenario choice, not a RAG requirement), the two modeled phases (query-time retrieval vs nightly ingestion/index maintenance), per-phase derived bandwidth (e.g. ingestion 20,000 IOPS × 64 KiB = 1.31 GB/s), and the scope note that GPU inference/token generation/corpus sources are outside the model. No demand values or engine rules changed; goldens unaffected. New screenshot: `m4/screenshots/desktop-workload-details-rag.png`.
+
 ## Not yet verified
 
 - Nothing outstanding within M0–M4 scope; V2 modeling, real adapters, and live validation remain deferred scope.

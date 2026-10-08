@@ -3,13 +3,16 @@
   "schemaVersion": "1.0.0",
   "synthetic": true,
   "name": "AI retrieval-augmented generation service",
-  "description": "Synthetic proposed workload: daytime query load plus nightly ingestion/re-embedding. Storage demand only; not a RAG benchmark.",
+  "description": "Synthetic proposed workload: a self-hosted vector/search service whose persistent index, content/metadata, and write-path files use filesystem volumes backed by the assessed block storage — a deployment assumption for this scenario, not a requirement of RAG. Two phases: query-time retrieval load and nightly ingestion/index maintenance (weekdays 02:00–05:00). Storage demand only; the advisor does not model GPU inference, token-generation performance, or a universal RAG benchmark, and corpus sources or model execution may sit outside the assessed storage.",
   "provenance": "synthetic educational assumption; see docs/synthetic-profile-proposal.md",
   "assumptions": [
     "schedule is stylized piecewise demand with no jitter",
     "throughput is derived from IOPS and block sizes, never an independent input",
     "peak IOPS is the schedule maximum and is informational only",
-    "ingestion uses 64 KiB blocks, deliberately exceeding the 16 KiB modeled backend block"
+    "deployment assumes a self-hosted vector/search service whose index, content/metadata, and write-path files sit on filesystem volumes backed by the assessed block storage; this is a scenario choice, not a requirement of RAG",
+    "two modeled phases: query-time retrieval (08:00–20:00 weekdays, lighter on weekends) versus ingestion/index maintenance (weekdays 02:00–05:00 — a three-hour window that is a substantial synthetic assumption)",
+    "ingestion uses 64 KiB blocks, deliberately exceeding the 16 KiB modeled backend block",
+    "GPU inference, token generation, embedding throughput, and corpus sourcing are outside the model and may consume no assessed storage"
   ],
   "capacityBytes": 32985348833280,
   "annualGrowthFraction": 0.4,
@@ -30,7 +33,7 @@
     { "name": "query-hours", "days": "weekend", "start": "08:00", "end": "20:00", "iops": 12000, "readFraction": 0.9, "readBlockBytes": 8192, "writeBlockBytes": 8192 },
     { "name": "off-hours", "days": "daily", "start": "20:00", "end": "02:00", "iops": 8000, "readFraction": 0.9, "readBlockBytes": 8192, "writeBlockBytes": 8192 },
     { "name": "off-hours", "days": "daily", "start": "05:00", "end": "08:00", "iops": 8000, "readFraction": 0.9, "readBlockBytes": 8192, "writeBlockBytes": 8192 },
-    { "name": "ingestion", "days": "weekday", "start": "02:00", "end": "05:00", "iops": 20000, "readFraction": 0.3, "readBlockBytes": 65536, "writeBlockBytes": 65536 },
+    { "name": "ingestion", "days": "weekday", "start": "02:00", "end": "05:00", "iops": 20000, "readFraction": 0.3, "readBlockBytes": 65536, "writeBlockBytes": 65536, "note": "three-hour ingestion/index-maintenance window — a substantial synthetic assumption" },
     { "name": "weekend-nights", "days": "weekend", "start": "02:00", "end": "05:00", "iops": 8000, "readFraction": 0.9, "readBlockBytes": 8192, "writeBlockBytes": 8192 }
   ]
 }

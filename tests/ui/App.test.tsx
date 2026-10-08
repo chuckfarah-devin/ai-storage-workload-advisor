@@ -83,4 +83,44 @@ describe('App (default INF-B × WL-VM)', () => {
     expect(screen.getByText(/Engine default: Monday/)).toBeInTheDocument();
     expect(screen.getByText(/No morning burst window is scheduled on Saturday/)).toBeInTheDocument();
   });
+
+  it('exactly one available preset stays selected and agrees with the displayed window', () => {
+    renderApp();
+    const pressed = () => screen.getAllByRole('button', { pressed: true });
+    expect(pressed()).toHaveLength(1);
+    expect(pressed()[0]).toHaveTextContent('Full day');
+
+    fireEvent.click(screen.getByRole('button', { name: 'Morning burst' }));
+    expect(pressed()).toHaveLength(1);
+    expect(pressed()[0]).toHaveTextContent('Morning burst');
+    // the displayed window agrees: the axis starts at 10:00 UTC (burst 10:05 − 5)
+    expect(screen.getByText('10:00 UTC')).toBeInTheDocument();
+    expect(screen.getByText('10:19 UTC')).toBeInTheDocument();
+
+    // changing the detail day resets selection to Full day and the window agrees
+    fireEvent.change(screen.getByLabelText('Detail day'), { target: { value: '5' } });
+    expect(pressed()).toHaveLength(1);
+    expect(pressed()[0]).toHaveTextContent('Full day');
+    expect(screen.getByText('00:00 UTC')).toBeInTheDocument();
+    // the disabled Saturday preset is not selectable
+    expect(screen.getByRole('button', { name: 'Morning burst' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Morning burst' })).toHaveAttribute('aria-pressed', 'false');
+  });
+
+  it('workload details describe the synthetic RAG deployment and phases', () => {
+    renderApp();
+    fireEvent.change(screen.getByLabelText('Proposed workload'), { target: { value: 'WL-RAG' } });
+    const det = screen.getByText(/Workload details — WL-RAG/).closest('details')!;
+    expect(det.textContent).toContain('self-hosted vector/search service');
+    expect(det.textContent).toContain('scenario choice, not a requirement of RAG');
+    expect(det.textContent).toContain('query-time retrieval');
+    expect(det.textContent).toContain('ingestion/index maintenance');
+    expect(det.textContent).toContain('GPU inference');
+    // phase table: 3 h ingestion window with derived 64 KiB bandwidth
+    expect(det.textContent).toContain('02:00–05:00');
+    expect(det.textContent).toContain('3 h');
+    expect(det.textContent).toContain('substantial synthetic assumption');
+    expect(det.textContent).toContain('1.31 GB/s');
+    expect(det.textContent).toContain('245.76 MB/s');
+  });
 });

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useChartWidth } from '../useChartWidth.js';
 import type { DerivedMinute, TraceRecord } from '../../engine/index.js';
 import type { TraceAssessment } from '../../engine/index.js';
@@ -40,6 +40,13 @@ export function DetailChart({ assessment, day, derivedDay, dayIndex, onDayChange
   const [inspect, setInspect] = useState(0); // offset within window
   const [activePreset, setActivePreset] = useState('full-day');
   const presets = presetWindows(BASELINE_SCHEDULE, dayIndex);
+  // Changing the detail day (or a scenario reset that changes it) returns the
+  // inspection window and the selected preset to Full day.
+  useEffect(() => {
+    setWindowRange([0, 1440]);
+    setInspect(0);
+    setActivePreset('full-day');
+  }, [dayIndex]);
   const { ref: chartRef, width: W } = useChartWidth();
   const RIGHT = W - RIGHT_PAD;
 
@@ -138,11 +145,7 @@ export function DetailChart({ assessment, day, derivedDay, dayIndex, onDayChange
             <select
               aria-label="Detail day"
               value={dayIndex}
-              onChange={(e) => {
-                onDayChange(Number(e.target.value));
-                setWindowRange([0, 1440]);
-                setInspect(0);
-              }}
+              onChange={(e) => onDayChange(Number(e.target.value))}
             >
               {DAY_NAMES.map((d, di) => (
                 <option key={d} value={di}>
@@ -170,6 +173,7 @@ export function DetailChart({ assessment, day, derivedDay, dayIndex, onDayChange
           <button
             key={p.id}
             disabled={!p.available}
+            aria-pressed={activePreset === p.id}
             title={p.explanation ?? p.note}
             onClick={() => {
               setActivePreset(p.id);

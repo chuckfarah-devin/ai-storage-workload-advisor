@@ -13,6 +13,7 @@ import {
   protectionCard,
   loadScenario,
   minuteReadout,
+  phaseRows,
   presetWindows,
 } from '../../src/ui/viewModel.js';
 import { deriveTraceMinutes } from '../../src/engine/index.js';
@@ -190,6 +191,30 @@ describe('latencyCard / protectionCard', () => {
     expect(drive).toMatchObject({ required: '1', declared: '2' }); // INF-B RAID 6 tolerates 2
     expect(rows.find((r) => r.name === 'snapshots')!.declared).toBe('true');
     expect(rows.find((r) => r.name === 'replication')!.declared).toBe('unknown');
+  });
+});
+
+describe('phaseRows', () => {
+  it('derives per-phase bandwidth from IOPS × read/write-weighted block size', () => {
+    const rows = phaseRows(loadScenario('INF-A', 'WL-RAG').workload);
+    const query = rows.find((r) => r.name === 'query-hours' && r.days === 'weekday')!;
+    expect(query.bandwidthStartBps).toBeCloseTo(30_000 * 8192, 0); // 245,760,000 B/s
+    const ingestion = rows.find((r) => r.name === 'ingestion')!;
+    expect(ingestion.windowUtc).toBe('02:00–05:00');
+    expect(ingestion.durationMinutes).toBe(180); // the three-hour synthetic assumption
+    expect(ingestion.bandwidthStartBps).toBeCloseTo(20_000 * 65536, 0); // 1,310,720,000 B/s
+    expect(ingestion.note).toMatch(/substantial synthetic assumption/);
+  });
+
+  it('handles overnight windows and ramp rows', () => {
+    const rag = phaseRows(loadScenario('INF-A', 'WL-RAG').workload);
+    const off = rag.find((r) => r.windowUtc === '20:00–02:00')!;
+    expect(off.durationMinutes).toBe(360); // wraps midnight
+    const vm = phaseRows(loadScenario('INF-B', 'WL-VM').workload);
+    const ramp = vm.find((r) => r.name === 'morning-ramp')!;
+    const weightedBlock = 0.7 * 16384 + 0.3 * 8192;
+    expect(ramp.bandwidthStartBps).toBeCloseTo(4_000 * weightedBlock, 0);
+    expect(ramp.bandwidthEndBps).toBeCloseTo(15_000 * weightedBlock, 0);
   });
 });
 

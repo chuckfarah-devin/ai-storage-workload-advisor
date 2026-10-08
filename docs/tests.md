@@ -68,6 +68,8 @@ Requirement IDs are defined in `docs/devin-initial-review.md` §6.1.
 | R-UI-3 | Narrow layout: no horizontal overflow at 375 px, panels stack, SVG axes and non-overlapping Y1/Y2 labels, wrapped legend | `tests/e2e/advisor.spec.ts` (Playwright, mobile project) |
 | R-UI-4 | No PowerMax/ONTAP/validated/production-sizing claims; no predicted post-addition latency | `tests/e2e/advisor.spec.ts` (Playwright, both projects) |
 | — | Browser checks: four combinations, what-ifs, weekly/detail inspection, exports, screenshots | `tests/e2e/advisor.spec.ts` |
+| — | Preset selection: `aria-pressed`, exactly-one-selected invariant, reset to Full day on day change | `tests/ui/App.test.tsx`, `tests/e2e/advisor.spec.ts` |
+| — | `phaseRows` derived phase bandwidth; WorkloadDetails RAG deployment/phases text | `tests/ui/viewModel.test.ts`, `tests/ui/App.test.tsx`, `tests/e2e/advisor.spec.ts` |
 
 ## Executed results history
 
@@ -79,6 +81,7 @@ Requirement IDs are defined in `docs/devin-initial-review.md` §6.1.
 | M3 | 2026-10-07 | `npm test`: 32 files / 171 tests passed |
 | M3 corrections + M4 | 2026-10-07 | `npm test`: 32 files / 179 tests passed; `npm run e2e` (Playwright, Chromium): 15 passed, 3 project-gated skips — 2 mobile-only tests skipped in the desktop viewport project, 1 desktop-only screenshot test skipped in the mobile viewport project |
 | M4 review fixes | 2026-10-07 | `npm test`: 32 files / 183 tests passed; `npm run e2e` (Playwright, Chromium): 15 passed, 3 project-gated skips (same viewport gating) |
+| V1 polish (presets, workload details) | 2026-10-07 | `npm test`: 32 files / 187 tests passed; `npm run e2e` (Playwright, Chromium): 17 passed, 3 project-gated skips (same viewport gating) |
 
 Latest run (October 7, 2026): `npm run typecheck` — 0 errors; `npm run lint` — 0 warnings, 0 errors (77 files); `npm run build` — `dist/assets/index-*.js` 311.38 kB (92.75 kB gzip).
 `npm run golden` regenerated `tests/golden/` M1 fixtures and `tests/golden/m2/*.json` with wording-only diffs ('validated' → 'measured'/'response curve' phrasing for R-UI-4); both golden tests confirm reproduction.

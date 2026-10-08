@@ -206,6 +206,57 @@ export function presetWindows(baselineSchedule: ScheduleRow[], dayIndex: number)
   return presets;
 }
 
+// ---- Workload phase table ----------------------------------------------------
+
+export interface PhaseRow {
+  name: string;
+  days: string;
+  /** 'HH:MM–HH:MM' UTC */
+  windowUtc: string;
+  durationMinutes: number;
+  /** ramp-aware: start == end for flat rows */
+  iopsStart: number;
+  iopsEnd: number;
+  readFraction: number;
+  readBlockBytes: number;
+  writeBlockBytes: number;
+  /** derived front-end bandwidth at window start/end, bytes/second */
+  bandwidthStartBps: number;
+  bandwidthEndBps: number;
+  note?: string;
+}
+
+const windowDuration = (start: number, end: number): number =>
+  end > start ? end - start : MINUTES_PER_DAY - start + end;
+
+/** Per-schedule-row demand phases with derived front-end bandwidth
+ *  (IOPS × read/write-weighted block size — the same formula the trace
+ *  generator uses; display only, never feeds the assessment). */
+export function phaseRows(workload: WorkloadProfile): PhaseRow[] {
+  return workload.schedule.map((r) => {
+    const iopsStart = r.iops ?? r.iopsStart ?? 0;
+    const iopsEnd = r.iops ?? r.iopsEnd ?? iopsStart;
+    const weightedBlock =
+      r.readFraction * r.readBlockBytes + (1 - r.readFraction) * r.writeBlockBytes;
+    const start = hhmm(r.start);
+    const end = hhmm(r.end);
+    return {
+      name: r.name ?? 'unnamed',
+      days: r.days,
+      windowUtc: `${r.start}–${r.end}`,
+      durationMinutes: windowDuration(start, end),
+      iopsStart,
+      iopsEnd,
+      readFraction: r.readFraction,
+      readBlockBytes: r.readBlockBytes,
+      writeBlockBytes: r.writeBlockBytes,
+      bandwidthStartBps: iopsStart * weightedBlock,
+      bandwidthEndBps: iopsEnd * weightedBlock,
+      ...(r.note !== undefined ? { note: r.note } : {}),
+    };
+  });
+}
+
 /** Label a bucket/minute by its UTC timestamp: 'Mon 10:00'. Day names are
  *  derived from the timestamp, never from an index. */
 export function bucketLabel(timestampUtc: string): string {

@@ -4,6 +4,7 @@ import { Controls, type Selection } from './ui/components/Controls.tsx';
 import { DecisionBanner } from './ui/components/DecisionBanner.tsx';
 import { DimensionCards } from './ui/components/DimensionCards.tsx';
 import { EnvironmentDetails } from './ui/components/EnvironmentDetails.tsx';
+import { WorkloadDetails } from './ui/components/WorkloadDetails.tsx';
 import { WeeklyChart } from './ui/components/WeeklyChart.tsx';
 import { DetailChart } from './ui/components/DetailChart.tsx';
 import { WhatIfPanel } from './ui/components/WhatIfPanel.tsx';
@@ -55,6 +56,7 @@ function App() {
         <DecisionBanner assessment={a} />
         <DimensionCards dimensions={a.dimensions} weekly={a.weekly} />
         <EnvironmentDetails infra={scenario.infra} />
+        <WorkloadDetails workload={scenario.workload} />
         <div className="columns">
           <div>
             <WeeklyChart

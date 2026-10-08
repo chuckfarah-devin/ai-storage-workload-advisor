@@ -96,6 +96,8 @@ export interface ScheduleRow {
   readFraction: number;
   readBlockBytes: number;
   writeBlockBytes: number;
+  /** Display-only annotation for the workload-details phase table; no rule reads it. */
+  note?: string;
 }
 
 export interface WorkloadProfile {

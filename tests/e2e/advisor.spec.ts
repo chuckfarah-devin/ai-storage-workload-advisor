@@ -108,9 +108,18 @@ test.describe('M4 browser verification', () => {
     const dp = detailPanel(page);
     const slider = dp.getByLabel('Inspect minute');
     const readout = dp.getByRole('status');
+    const pressed = dp.locator('button[aria-pressed="true"]');
+
+    // Full day is the selected preset on load — exactly one pressed
+    await expect(pressed).toHaveCount(1);
+    await expect(dp.getByRole('button', { name: 'Full day' })).toHaveAttribute('aria-pressed', 'true');
 
     await dp.getByRole('button', { name: 'Morning burst' }).click();
     await expect(readout).toContainText('10:00 UTC');
+    // selection visibly retained: exactly one pressed button, matching the window
+    await expect(pressed).toHaveCount(1);
+    await expect(dp.getByRole('button', { name: 'Morning burst' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(dp.getByRole('button', { name: 'Full day' })).toHaveAttribute('aria-pressed', 'false');
     await setSlider(slider, 5);
     await expect(readout).toContainText('10:05 UTC');
     await expect(readout).toContainText('1.4 ms');
@@ -140,14 +149,32 @@ test.describe('M4 browser verification', () => {
     await expect(readout).toContainText('65536');
     await shot(page, 'desktop-rag-unknown-ingestion');
 
-    // day selector: Saturday disables morning burst with explanation
+    // day selector: Saturday disables morning burst, resets selection to Full day
     await dp.getByLabel('Detail day').selectOption('5');
     await expect(dp.getByRole('button', { name: 'Morning burst' })).toBeDisabled();
+    await expect(pressed).toHaveCount(1);
+    await expect(dp.getByRole('button', { name: 'Full day' })).toHaveAttribute('aria-pressed', 'true');
     await expect(dp.getByText(/No morning burst window is scheduled on Saturday/)).toBeVisible();
     await expect(dp.getByText(/Engine default: Monday/)).toBeVisible();
 
     // latency axis label exists, distinct from Y1
     await expect(dp.locator('svg').getByText('Latency (ms)')).toBeVisible();
+  });
+
+  test('h. workload details expand with phases and the RAG deployment assumption', async ({ page }) => {
+    await selectScenario(page, 'INF-A', 'WL-RAG');
+    const det = page.locator('details').filter({ hasText: 'Workload details' });
+    await det.locator('summary').click();
+    await expect(det).toContainText('self-hosted vector/search service');
+    await expect(det).toContainText('not a requirement of RAG');
+    await expect(det).toContainText('query-time retrieval');
+    await expect(det).toContainText('ingestion/index maintenance');
+    await expect(det).toContainText('GPU inference');
+    // phase table: three-hour ingestion window, derived bandwidth shown
+    await expect(det).toContainText('02:00–05:00');
+    await expect(det).toContainText('substantial synthetic assumption');
+    await expect(det).toContainText('1.31 GB/s');
+    await shot(page, 'desktop-workload-details-rag');
   });
 
   test('e. exports download engine output', async ({ page }) => {
