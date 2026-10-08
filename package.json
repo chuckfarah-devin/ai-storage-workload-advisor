@@ -1,5 +1,8 @@
 {
   "name": "ai-storage-workload-advisor",
+  "description": "Specification-driven synthetic assessment: can current storage infrastructure support a proposed workload? Educational demonstration; not vendor sizing or production guidance.",
+  "author": "Chuck Farah",
+  "license": "MIT",
   "private": true,
   "version": "0.0.0",
   "type": "module",

@@ -77,8 +77,8 @@ Requirement IDs are defined in `docs/devin-initial-review.md` §6.1.
 | R-SET-1 | 2026-10-06 | `npm test`: 18 files / 100 tests passed |
 | M2 | 2026-10-07 | `npm test`: 30 files / 150 tests passed |
 | M3 | 2026-10-07 | `npm test`: 32 files / 171 tests passed |
-| M3 corrections + M4 | 2026-10-07 | `npm test`: 32 files / 179 tests passed; `npm run e2e` (Playwright): 15 passed, 3 project-gated skips |
-| M4 review fixes | 2026-10-07 | `npm test`: 32 files / 183 tests passed; `npm run e2e` (Playwright): 15 passed, 3 project-gated skips |
+| M3 corrections + M4 | 2026-10-07 | `npm test`: 32 files / 179 tests passed; `npm run e2e` (Playwright, Chromium): 15 passed, 3 project-gated skips — 2 mobile-only tests skipped in the desktop viewport project, 1 desktop-only screenshot test skipped in the mobile viewport project |
+| M4 review fixes | 2026-10-07 | `npm test`: 32 files / 183 tests passed; `npm run e2e` (Playwright, Chromium): 15 passed, 3 project-gated skips (same viewport gating) |
 
 Latest run (October 7, 2026): `npm run typecheck` — 0 errors; `npm run lint` — 0 warnings, 0 errors (77 files); `npm run build` — `dist/assets/index-*.js` 311.38 kB (92.75 kB gzip).
 `npm run golden` regenerated `tests/golden/` M1 fixtures and `tests/golden/m2/*.json` with wording-only diffs ('validated' → 'measured'/'response curve' phrasing for R-UI-4); both golden tests confirm reproduction.
